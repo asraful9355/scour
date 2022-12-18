@@ -54,7 +54,7 @@ Route::middleware(['auth','role:admin'])->group(function() {
 /*================== Backend Admin All Routes ==============*/
 // Route::group(['middleware'=>['auth:sanctum', 'verified']], function(){
 // 	Route::get('/dashboard',[AdminController::class, 'dashboard'])->name('admin.dashboard');
-// 	Route::get('/logout',[AdminController::class, 'AminLogout'])->name('admin.logout');
+	// Route::get('/logout',[AdminController::class, 'AminLogout'])->name('admin.logout');
 
 
 //     Route::prefix('profile')->group(function(){

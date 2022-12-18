@@ -13,7 +13,7 @@ class UserController extends Controller
 
         $id = Auth::user()->id;
         $userData = User::find($id);
-        return view('dashboard');
+        return view('layouts.app2');
 
     } // End Method
 
