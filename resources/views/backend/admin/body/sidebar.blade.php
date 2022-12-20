@@ -58,13 +58,18 @@
       <i class="fas fa-fw fa-folder"></i>
       <span>Banner</span>
       </a>
-      <div id="banner" class="collapse " aria-labelledby="headingPages" data-parent="#accordionSidebar">
+      <div id="banner" class="collapse
+
+      {{ ($route == 'banner.index') ? 'show' : '' }}
+      {{ ($route == 'banner.create') ? 'show' : '' }}
+      " aria-labelledby="headingPages" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item " href="#">Manage Banner</a>
-            <a class="collapse-item " href="#">Add Banner</a>
+            <a class="collapse-item {{ ($route == 'banner.index') ? 'active' : '' }}" href="{{ route('banner.index') }}">Manage Banner</a>
+            <a class="collapse-item {{ ($route == 'banner.create') ? 'active' : '' }}" href="{{ route('banner.create') }}">Add Banner</a>
          </div>
       </div>
    </li>
+
    <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#product"
          aria-expanded="true" aria-controls="real_estate">

@@ -5,6 +5,7 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\MenuController;
 use App\Http\Controllers\Frontend\FrontendController;
 
@@ -24,7 +25,7 @@ Route::get('/',[FrontendController::class, 'index']);
 // User Dashboard
 Route::middleware(['auth'])->group(function() {
 
-    Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('dashboard');
+    Route::get('/dashboard', [UserController::class, 'UserDashboard'])->nae(m'dashboard');
     Route::post('/user/profile/store', [UserController::class, 'UserProfileStore'])->name('user.profile.store');
     Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
     Route::post('/user/update/password', [UserController::class, 'UserUpdatePassword'])->name('user.update.password');
@@ -51,6 +52,7 @@ Route::middleware(['auth','role:admin'])->group(function() {
 
 }); // Admin End Middleware
 
+
 /*================== Backend Admin All Routes ==============*/
 // Route::group(['middleware'=>['auth:sanctum', 'verified']], function(){
 // 	Route::get('/dashboard',[AdminController::class, 'dashboard'])->name('admin.dashboard');
@@ -75,6 +77,7 @@ Route::middleware(['auth','role:admin'])->group(function() {
     //     Route::get('/category-inactive/{id}', [CategoryController::class, 'inactive'])->name('category.in_active');
 
     // });
+
     Route::group(['prefix'=>'menu'], function(){
         Route::get('/index', [MenuController::class, 'index'])->name('menu.index');
         Route::get('/create', [MenuController::class, 'create'])->name('menu.create');
@@ -87,12 +90,20 @@ Route::middleware(['auth','role:admin'])->group(function() {
 
     });
 
+    Route::group(['prefix'=>'banner'], function(){
+        Route::get('/index', [BannerController::class, 'index'])->name('banner.index');
+        Route::get('/create', [BannerController::class, 'create'])->name('banner.create');
+        Route::post('/store', [BannerController::class, 'store'])->name('banner.store');
+        Route::get('/edit/{id}', [BannerController::class, 'edit'])->name('banner.edit');
+        Route::post('/update/{id}', [BannerController::class, 'update'])->name('banner.update');
+        Route::get('/destroy/{id}', [BannerController::class, 'destroy'])->name('banner.destroy');
+        Route::get('/banner-active/{id}', [BannerController::class, 'active'])->name('banner.active');
+        Route::get('/banner-inactive/{id}', [BannerController::class, 'inactive'])->name('banner.in_active');
+
+    });
 
 
-// });
 
-// Route::get('/dashboard', function () {
-//     return index('dashboard');
-// })->middleware(['auth'])->name('dashboard');
+
 
 require __DIR__.'/auth.php';
