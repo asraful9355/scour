@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-	<!-- Required meta tags --> 
-	<meta charset="utf-8"> 
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--favicon-->
 	<link rel="icon" href="{{ asset('adminbackend/assets/images/favicon-32x32.png') }}" type="image/png" />
@@ -35,7 +35,7 @@
 	<title>Admin Dashboard</title>
 </head>
 
-<body> 
+<body>
 	<!--wrapper-->
 	<div class="wrapper">
 		<!--sidebar wrapper -->
@@ -50,7 +50,7 @@
 		</div>
 		<!--end page wrapper -->
 
- 
+
 		<!--start overlay-->
 		<div class="overlay toggle-icon"></div>
 		<!--end overlay-->
@@ -60,7 +60,7 @@
 	</div>
 	<!--end wrapper-->
 	<!--start switcher-->
-	 
+
 	<!--end switcher-->
 	<!-- Bootstrap JS -->
 	<script src="{{ asset('adminbackend/assets/js/bootstrap.bundle.min.js') }}"></script>
@@ -118,9 +118,9 @@
 
         case 'error':
         toastr.error(" {{ Session::get('message') }} ");
-        break; 
+        break;
     }
-    @endif 
+    @endif
 </script>
 
 <!-- all toastr message show  old-->
@@ -147,12 +147,27 @@
 <script src="{{ asset('adminbackend/assets/plugins/input-tags/js/tagsinput.js') }}"></script>
 
 <script src='https://cdn.tiny.cloud/1/vdqx2klew412up5bcbpwivg1th6nrh3murc6maz8bukgos4v/tinymce/5/tinymce.min.js' referrerpolicy="origin"></script>
-	
+
 <script>
 	tinymce.init({
 	  selector: '#mytextarea'
 	});
 </script>
+
+{{-- aituko picture show er jonne --}}
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $('#image').change(function(e){
+            var reader = new FileReader();
+            reader.onload = function(e){
+                $('#showImage').attr('src',e.target.result);
+            }
+            reader.readAsDataURL(e.target.files['0']);
+        });
+    });
+
+  </script>
 
 </body>
 

@@ -41,9 +41,9 @@ class BannerController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name_en'=>'required',
             'title_en'=>'required',
             'description_en'=>'required',
+            'button_name_en'=>'required',
             'banner_image'=>'required'
         ]);
 
@@ -57,13 +57,6 @@ class BannerController extends Controller
         }
 
         $banner = new Banner();
-
-        $banner->name_en = $request->name_en;
-        if($request->name_bn == ''){
-            $banner->name_bn = $request->name_en;
-        }else{
-            $banner->name_bn = $request->name_bn;
-        }
 
         $banner->title_en = $request->title_en;
         if($request->title_bn == ''){
@@ -89,7 +82,7 @@ class BannerController extends Controller
         if($request->status == Null){
             $request->status = 0;
         }
-        $banner->slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', strtolower($request->name_en)));
+        $banner->slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', strtolower($request->title_en)));
 
         $banner->status = $request->status;
 
@@ -99,7 +92,7 @@ class BannerController extends Controller
 
         $banner->save();
 
-        Session::flash('success','BannerBanner Inserted Successfully');
+        Session::flash('success','Banner Inserted Successfully');
         return redirect()->route('banner.index');
     }
 
@@ -122,7 +115,8 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
-        return view('backend.banner.edit');
+        $banner = Banner::find($id);
+        return view('backend.banner.edit',compact('banner'));
     }
 
     /**
@@ -154,13 +148,6 @@ class BannerController extends Controller
         }
 
 
-        $banner->name_en = $request->name_en;
-        if($request->name_bn == ''){
-            $banner->name_bn = $request->name_en;
-        }else{
-            $banner->name_bn = $request->name_bn;
-        }
-
         $banner->title_en = $request->title_en;
         if($request->title_bn == ''){
             $banner->title_bn = $request->title_en;
@@ -185,7 +172,7 @@ class BannerController extends Controller
         if($request->status == Null){
             $request->status = 0;
         }
-        $banner->slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', strtolower($request->name_en)));
+        $banner->slug = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', strtolower($request->title_en)));
 
         $banner->status = $request->status;
 

@@ -345,6 +345,21 @@
   });
 </script>
 
+
+{{-- aituko picture show er jonne --}}
+<script type="text/javascript">
+
+    $(document).ready(function(){
+        $('#image').change(function(e){
+            var reader = new FileReader();
+            reader.onload = function(e){
+                $('#showImage').attr('src',e.target.result);
+            }
+            reader.readAsDataURL(e.target.files['0']);
+        });
+    });
+
+  </script>
 <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
     {!! Toastr::message() !!}
