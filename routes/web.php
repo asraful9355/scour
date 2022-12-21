@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\FeaturedProjectContoller;
 use App\Http\Controllers\Backend\MenuController;
 use App\Http\Controllers\Frontend\FrontendController;
 
@@ -74,7 +76,8 @@ Route::middleware(['auth','role:admin'])->group(function() {
     //     Route::get('/category-active/{id}', [CategoryController::class, 'active'])->name('category.active');
     //     Route::get('/category-inactive/{id}', [CategoryController::class, 'inactive'])->name('category.in_active');
 
-    // });
+    // }); 
+
     Route::group(['prefix'=>'menu'], function(){
         Route::get('/index', [MenuController::class, 'index'])->name('menu.index');
         Route::get('/create', [MenuController::class, 'create'])->name('menu.create');
@@ -86,6 +89,50 @@ Route::middleware(['auth','role:admin'])->group(function() {
         Route::get('/menu-inactive/{id}', [MenuController::class, 'inactive'])->name('menu.in_active');
 
     });
+
+    Route::group(['prefix'=>'about'], function(){
+        Route::get('/index', [AboutController::class, 'index'])->name('about.index');
+        Route::get('/create', [AboutController::class, 'create'])->name('about.create');
+        Route::post('/store', [AboutController::class, 'store'])->name('about.store');
+        Route::get('/edit/{id}', [AboutController::class, 'edit'])->name('about.edit');
+        Route::post('/update/{id}', [AboutController::class, 'update'])->name('about.update');
+        Route::get('/destroy/{id}', [AboutController::class, 'destroy'])->name('about.destroy');
+        Route::get('/menu-active/{id}', [AboutController::class, 'active'])->name('about.active');
+        Route::get('/menu-inactive/{id}', [AboutController::class, 'inactive'])->name('about.in_active');
+
+        Route::get('/company/descriptio/', [AboutController::class, 'descriptio_index'])->name('about.description.index');
+        Route::get('/company/descriptio/create', [AboutController::class, 'descriptio_create'])->name('about.description.create');
+        Route::post('/company/descriptio/store', [AboutController::class, 'descriptio_store'])->name('about.description.store');
+        Route::get('/company/descriptio/edit/{id}', [AboutController::class, 'descriptio_edit'])->name('about.description.edit');
+        Route::post('/company/descriptio/update/{id}', [AboutController::class, 'descriptio_update'])->name('about.description.update');
+        Route::get('/company/descriptio/destroy/{id}', [AboutController::class, 'descriptio_destroy'])->name('about.description.destroy');
+        Route::get('/company/descriptio/menu-active/{id}', [AboutController::class, 'descriptio_active'])->name('about.description.active');
+        Route::get('/company/descriptio/menu-inactive/{id}', [AboutController::class, 'descriptio_inactive'])->name('about.description.in_active');
+
+    });
+
+    Route::group(['prefix'=>'project'], function(){
+
+        Route::get('/featured/descriptio/', [FeaturedProjectContoller::class, 'descriptio_index'])->name('project.description.index');
+        Route::get('/featured/descriptio/create', [FeaturedProjectContoller::class, 'descriptio_create'])->name('project.description.create');
+        Route::post('/featured/descriptio/store', [FeaturedProjectContoller::class, 'descriptio_store'])->name('project.description.store');
+        Route::get('/featured/descriptio/edit/{id}', [FeaturedProjectContoller::class, 'descriptio_edit'])->name('project.description.edit');
+        Route::post('/featured/descriptio/update/{id}', [FeaturedProjectContoller::class, 'descriptio_update'])->name('project.description.update');
+        Route::get('/featured/descriptio/destroy/{id}', [FeaturedProjectContoller::class, 'descriptio_destroy'])->name('project.description.destroy');
+        Route::get('/featured/descriptio/menu-active/{id}', [FeaturedProjectContoller::class, 'descriptio_active'])->name('project.description.active');
+        Route::get('/featured/descriptio/menu-inactive/{id}', [FeaturedProjectContoller::class, 'descriptio_inactive'])->name('project.description.in_active');
+        
+        Route::get('/index', [FeaturedProjectContoller::class, 'index'])->name('project.index');
+        Route::get('/create', [FeaturedProjectContoller::class, 'create'])->name('project.create');
+        Route::post('/store', [FeaturedProjectContoller::class, 'store'])->name('project.store');
+        Route::get('/edit/{id}', [FeaturedProjectContoller::class, 'edit'])->name('project.edit');
+        Route::post('/update/{id}', [FeaturedProjectContoller::class, 'update'])->name('project.update');
+        Route::get('/destroy/{id}', [FeaturedProjectContoller::class, 'destroy'])->name('project.destroy');
+        Route::get('/menu-active/{id}', [FeaturedProjectContoller::class, 'active'])->name('project.active');
+        Route::get('/menu-inactive/{id}', [FeaturedProjectContoller::class, 'inactive'])->name('project.in_active');
+        
+
+    }); 
 
 
 

@@ -52,6 +52,49 @@
          </div>
       </div>
    </li>
+
+   
+   <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#about"
+         aria-expanded="true" aria-controls="real_estate">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>About Scour Company</span> 
+      </a>
+      <div id="about" class="collapse
+
+      {{ ($route == 'about.description.index') ? 'show' : '' }}
+      {{ ($route == 'about.index') ? 'show' : '' }}
+      {{ ($route == 'about.create') ? 'show' : '' }}
+      " aria-labelledby="headingPages" data-parent="#accordionSidebar">
+         <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item {{ ($route == 'about.description.index') ? 'active' : '' }}" href="{{ route('about.description.index') }}">Company Description</a>
+            <a class="collapse-item {{ ($route == 'about.index') ? 'active' : '' }}" href="{{ route('about.index') }}">Manage About</a>
+            <a class="collapse-item {{ ($route == 'about.create') ? 'active' : '' }}" href="{{ route('about.create') }}">Add About</a>
+         </div>
+      </div>
+   </li> 
+
+   <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#featured_project"
+         aria-expanded="true" aria-controls="real_estate">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>Featured Projects</span> 
+      </a>
+      <div id="featured_project" class="collapse
+
+      {{ ($route == 'project.description.index') ? 'show' : '' }}
+      {{ ($route == 'project.index') ? 'show' : '' }}
+      {{ ($route == 'project.create') ? 'show' : '' }}
+      " aria-labelledby="headingPages" data-parent="#accordionSidebar">
+         <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item {{ ($route == 'project.description.index') ? 'active' : '' }}" href="{{ route('project.description.index') }}">Featured Description</a>
+            <a class="collapse-item {{ ($route == 'project.index') ? 'active' : '' }}" href="{{ route('project.index') }}">Manage Project</a>
+            <a class="collapse-item {{ ($route == 'project.create') ? 'active' : '' }}" href="{{ route('project.create') }}">Add Project</a>
+         </div>
+      </div>
+   </li> 
+
+
    <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#banner"
          aria-expanded="true" aria-controls="real_estate">
