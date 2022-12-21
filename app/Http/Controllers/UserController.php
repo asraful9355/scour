@@ -66,7 +66,7 @@ class UserController extends Controller
 
  public function UserPasswordUpdate(Request $request){
 
-       
+
         // Validation
         $request->validate([
             'old_password' => 'required',

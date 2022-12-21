@@ -53,6 +53,7 @@ Route::middleware(['auth','role:admin'])->group(function() {
 
 }); // Admin End Middleware
 
+
 /*================== Backend Admin All Routes ==============*/
 // Route::group(['middleware'=>['auth:sanctum', 'verified']], function(){
 // 	Route::get('/dashboard',[AdminController::class, 'dashboard'])->name('admin.dashboard');
@@ -136,10 +137,6 @@ Route::middleware(['auth','role:admin'])->group(function() {
 
 
 
-// });
 
-// Route::get('/dashboard', function () {
-//     return index('dashboard');
-// })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
