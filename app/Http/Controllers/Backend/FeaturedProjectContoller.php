@@ -17,7 +17,7 @@ class FeaturedProjectContoller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function descriptio_index()
+    public function description_index()
     {
         $descriptions = FeaturedProjectDescription::latest()->get();
         return view('backend.featured_project.description_index', compact('descriptions'));
@@ -28,9 +28,9 @@ class FeaturedProjectContoller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function descriptio_create()
+    public function description_create()
     {
-        return view('backend.featured_project.descriptio_create');
+        return view('backend.featured_project.description_create');
     }
 
     /**
@@ -39,7 +39,7 @@ class FeaturedProjectContoller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function descriptio_store(Request $request)
+    public function description_store(Request $request)
     {
         //  dd($request);
          $this->validate($request, [
@@ -71,7 +71,7 @@ class FeaturedProjectContoller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function descriptio_edit($id)
+    public function description_edit($id)
     {
         $description = FeaturedProjectDescription::find($id);
         return view('backend.featured_project.description_edit', compact('description'));
@@ -84,7 +84,7 @@ class FeaturedProjectContoller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function descriptio_update(Request $request, $id)
+    public function description_update(Request $request, $id)
     {
         //  dd($request);
         $this->validate($request, [
@@ -114,7 +114,7 @@ class FeaturedProjectContoller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function descriptio_destroy($id)
+    public function description_destroy($id)
     {
         $description = FeaturedProjectDescription::find($id);
         $description->delete();
@@ -123,7 +123,7 @@ class FeaturedProjectContoller extends Controller
 
     }
 
-    public function descriptio_active($id){
+    public function description_active($id){
 
         $description = FeaturedProjectDescription::find($id);
         $description->status = 1;
@@ -133,7 +133,7 @@ class FeaturedProjectContoller extends Controller
         return redirect()->back();
     }
 
-    public function descriptio_inactive($id){
+    public function description_inactive($id){
         $description = FeaturedProjectDescription::find($id);
         $description->status = 0;
         $description->save();

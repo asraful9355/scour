@@ -94,6 +94,26 @@
       </div>
    </li> 
 
+   <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#services"
+         aria-expanded="true" aria-controls="real_estate">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>Our Services</span> 
+      </a>
+      <div id="services" class="collapse
+
+      {{ ($route == 'services.description.index') ? 'show' : '' }}
+      {{ ($route == 'services.index') ? 'show' : '' }}
+      {{ ($route == 'services.create') ? 'show' : '' }}
+      " aria-labelledby="headingPages" data-parent="#accordionSidebar">
+         <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item {{ ($route == 'services.description.index') ? 'active' : '' }}" href="{{ route('services.description.index') }}">Services Description</a>
+            <a class="collapse-item {{ ($route == 'services.index') ? 'active' : '' }}" href="{{ route('services.index') }}">Manage Services</a>
+            <a class="collapse-item {{ ($route == 'services.create') ? 'active' : '' }}" href="{{ route('services.create') }}">Add Services</a>
+         </div>
+      </div>
+   </li> 
+
 
    <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#banner"
