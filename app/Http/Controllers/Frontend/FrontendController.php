@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\About;
+use App\Models\AboutDescription;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -12,7 +14,7 @@ class FrontendController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() 
     {
        return view('frontend.index');
     }

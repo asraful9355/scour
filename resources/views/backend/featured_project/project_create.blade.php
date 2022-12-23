@@ -17,7 +17,7 @@
                <div class="col-md-10 offset-1">
                   <div class="card shadow mb-4">
                      <div class="card-body">
-                        <h4>About Create</h4>
+                        <h4>Project Create</h4>
                         <hr>
                         <div class="row">
                           
