@@ -115,6 +115,26 @@
    </li> 
 
    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#client"
+         aria-expanded="true" aria-controls="real_estate">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>Our Clients</span> 
+      </a>
+      <div id="client" class="collapse
+
+      {{ ($route == 'client.description.index') ? 'show' : '' }}
+      {{ ($route == 'client.index') ? 'show' : '' }}
+      {{ ($route == 'client.create') ? 'show' : '' }}
+      " aria-labelledby="headingPages" data-parent="#accordionSidebar">
+         <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item {{ ($route == 'client.description.index') ? 'active' : '' }}" href="{{ route('client.description.index') }}">Client Description</a>
+            <a class="collapse-item {{ ($route == 'client.index') ? 'active' : '' }}" href="{{ route('client.index') }}">Manage Client</a>
+            <a class="collapse-item {{ ($route == 'client.create') ? 'active' : '' }}" href="{{ route('client.create') }}">Add Client</a>
+         </div>
+      </div>
+   </li> 
+
+   <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#team"
          aria-expanded="true" aria-controls="real_estate">
       <i class="fas fa-fw fa-folder"></i>
