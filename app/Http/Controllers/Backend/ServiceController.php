@@ -43,7 +43,7 @@ class ServiceController extends Controller
     {
         // dd($request);
         $this->validate($request, [
-            'title_en' => 'required',
+            'title_en' => 'required|max:100|min:1',
             'image' => 'required',
             'description_en' => 'required',
         ]);
@@ -75,6 +75,10 @@ class ServiceController extends Controller
         $service_img = 'upload/service/'.$name_gen;
 
         $service->image = $service_img;
+
+        if($request->status == Null){
+            $request->status = 0;
+        }
         $service->status = $request->status;
 
         $service->save();
@@ -107,7 +111,7 @@ class ServiceController extends Controller
     {
         // dd($request);
         $this->validate($request, [
-            'title_en' => 'required',
+            'title_en' => 'required|max:100|min:1',
             'description_en' => 'required',
         ]);
 
@@ -149,6 +153,10 @@ class ServiceController extends Controller
         }
 
         $service->image = $service_img;
+
+        if($request->status == Null){
+            $request->status = 0;
+        }
         $service->status = $request->status;
 
         $service->save();
@@ -249,6 +257,10 @@ class ServiceController extends Controller
         $service_img = 'upload/service/'.$name_gen;
 
         $service_description->image = $service_img;
+
+        if($request->status == Null){
+            $request->status = 0;
+        }
         $service_description->status = $request->status;
         $service_description->save();
 
@@ -313,6 +325,10 @@ class ServiceController extends Controller
         
 
         $service_description->image = $service_img;
+
+        if($request->status == Null){
+            $request->status = 0;
+        }
         $service_description->status = $request->status;
         $service_description->save();
 

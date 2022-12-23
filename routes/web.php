@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\FeaturedProjectContoller;
 use App\Http\Controllers\Backend\MenuController;
 use App\Http\Controllers\Backend\ServiceController;
+use App\Http\Controllers\Backend\TeamController;
 use App\Http\Controllers\Frontend\FrontendController;
 
 
@@ -170,6 +171,28 @@ Route::middleware(['auth','role:admin'])->group(function() {
         Route::get('/description/destroy/{id}', [ServiceController::class, 'description_destroy'])->name('services.description.destroy');
         Route::get('/description/menu-active/{id}', [ServiceController::class, 'description_active'])->name('services.description.active');
         Route::get('/description/menu-inactive/{id}', [ServiceController::class, 'description_inactive'])->name('services.description.in_active');
+
+    });
+    
+    Route::group(['prefix'=>'team'], function(){
+        Route::get('/index', [TeamController::class, 'index'])->name('team.index');
+        Route::get('/create', [TeamController::class, 'create'])->name('team.create');
+        Route::post('/store', [TeamController::class, 'store'])->name('team.store');
+        Route::get('/edit/{id}', [TeamController::class, 'edit'])->name('team.edit');
+        Route::post('/update/{id}', [TeamController::class, 'update'])->name('team.update');
+        Route::get('/destroy/{id}', [TeamController::class, 'destroy'])->name('team.destroy');
+        Route::get('/menu-active/{id}', [TeamController::class, 'active'])->name('team.active');
+        Route::get('/menu-inactive/{id}', [TeamController::class, 'inactive'])->name('team.in_active');
+
+        // ==== Description=========
+        Route::get('/description/', [TeamController::class, 'description_index'])->name('team.description.index');
+        Route::get('/description/create', [TeamController::class, 'description_create'])->name('team.description.create');
+        Route::post('/description/store', [TeamController::class, 'description_store'])->name('team.description.store');
+        Route::get('/description/edit/{id}', [TeamController::class, 'description_edit'])->name('team.description.edit');
+        Route::post('/description/update/{id}', [TeamController::class, 'description_update'])->name('team.description.update');
+        Route::get('/description/destroy/{id}', [TeamController::class, 'description_destroy'])->name('team.description.destroy');
+        Route::get('/description/menu-active/{id}', [TeamController::class, 'description_active'])->name('team.description.active');
+        Route::get('/description/menu-inactive/{id}', [TeamController::class, 'description_inactive'])->name('team.description.in_active');
 
     });
 

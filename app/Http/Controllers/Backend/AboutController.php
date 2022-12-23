@@ -43,7 +43,7 @@ class AboutController extends Controller
     {
         // dd($request);
         $this->validate($request, [
-            'about_title_en' => 'required|max:100|min:8',
+            'about_title_en' => 'required|max:100|min:1',
             'about_image' => 'required',
             'about_description_en' => 'required',
         ]);
@@ -75,6 +75,10 @@ class AboutController extends Controller
         $about_img = 'upload/about/'.$name_gen;
 
         $about->about_image = $about_img;
+
+        if($request->status == Null){
+            $request->status = 0;
+        }
         $about->status = $request->status;
 
         $about->save();
@@ -107,7 +111,7 @@ class AboutController extends Controller
     {
         // dd($request);
         $this->validate($request, [
-            'about_title_en' => 'required|max:100|min:8',
+            'about_title_en' => 'required|max:100|min:1',
             'about_description_en' => 'required',
         ]);
 
@@ -150,6 +154,10 @@ class AboutController extends Controller
         }
 
         $about->about_image = $about_img;
+
+        if($request->status == Null){
+            $request->status = 0;
+        }
         $about->status = $request->status;
 
         $about->save();
@@ -242,6 +250,9 @@ class AboutController extends Controller
             $company_description->about_descrption_bn = $request->about_descrption_bn;
         }
 
+        if($request->status == Null){
+            $request->status = 0;
+        }
         $company_description->status = $request->status;
         $company_description->save();
 
@@ -286,6 +297,9 @@ class AboutController extends Controller
             $company_description->about_descrption_bn = $request->about_descrption_bn;
         }
 
+        if($request->status == Null){
+            $request->status = 0;
+        }
         $company_description->status = $request->status;
         $company_description->save();
 
