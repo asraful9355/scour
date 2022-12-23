@@ -48,13 +48,13 @@ class AboutController extends Controller
             'about_description_en' => 'required',
         ]);
 
-        // slug insert   
+        // slug insert
         $slug  = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', strtolower($request->about_title_en)));
 
         $about = new About();
         $about->about_title_en = $request->about_title_en;
         $about->slug = $slug;
-        
+
         if($request->about_title_bn == ''){
             $about->about_title_bn = $request->about_title_en;
         }else{
@@ -111,13 +111,13 @@ class AboutController extends Controller
             'about_description_en' => 'required',
         ]);
 
-        // slug insert   
+        // slug insert
         $slug  = preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', strtolower($request->about_title_en)));
 
         $about = About::find($id);
         $about->about_title_en = $request->about_title_en;
         $about->slug = $slug;
-        
+
         if($request->about_title_bn == ''){
             $about->about_title_bn = $request->about_title_en;
         }else{
@@ -139,7 +139,7 @@ class AboutController extends Controller
                     unlink($about->about_image);
                 }
             } catch (Exception $e) { }
-            
+
             // image insert
             $image = $request->file('about_image');
             $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
@@ -153,7 +153,7 @@ class AboutController extends Controller
         $about->status = $request->status;
 
         $about->save();
-        
+
         Session::flash('success', 'Adout item update Successfully');
         return redirect()->route('about.index');
     }
@@ -232,7 +232,7 @@ class AboutController extends Controller
          $this->validate($request, [
             'about_descrption_en' => 'required',
         ]);
-       
+
         $company_description = new AboutDescription();
         $company_description->about_descrption_en = $request->about_descrption_en;
 
@@ -249,7 +249,7 @@ class AboutController extends Controller
         return redirect()->route('about.description.index');
     }
 
-  
+
 
     /**
      * Show the form for editing the specified resource.
@@ -276,7 +276,7 @@ class AboutController extends Controller
         $this->validate($request, [
             'about_descrption_en' => 'required',
         ]);
-       
+
         $company_description =  AboutDescription::find($id);
         $company_description->about_descrption_en = $request->about_descrption_en;
 

@@ -53,12 +53,12 @@
       </div>
    </li>
 
-   
+
    <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#about"
          aria-expanded="true" aria-controls="real_estate">
       <i class="fas fa-fw fa-folder"></i>
-      <span>About Scour Company</span> 
+      <span>About Company</span>
       </a>
       <div id="about" class="collapse
 
@@ -72,13 +72,13 @@
             <a class="collapse-item {{ ($route == 'about.create') ? 'active' : '' }}" href="{{ route('about.create') }}">Add About</a>
          </div>
       </div>
-   </li> 
+   </li>
 
    <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#featured_project"
          aria-expanded="true" aria-controls="real_estate">
       <i class="fas fa-fw fa-folder"></i>
-      <span>Featured Projects</span> 
+      <span>Featured Projects</span>
       </a>
       <div id="featured_project" class="collapse
 
@@ -92,7 +92,7 @@
             <a class="collapse-item {{ ($route == 'project.create') ? 'active' : '' }}" href="{{ route('project.create') }}">Add Project</a>
          </div>
       </div>
-   </li> 
+   </li>
 
 
    <li class="nav-item">
@@ -109,6 +109,23 @@
          <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item {{ ($route == 'banner.index') ? 'active' : '' }}" href="{{ route('banner.index') }}">Manage Banner</a>
             <a class="collapse-item {{ ($route == 'banner.create') ? 'active' : '' }}" href="{{ route('banner.create') }}">Add Banner</a>
+         </div>
+      </div>
+   </li>
+   <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#choose"
+         aria-expanded="true" aria-controls="real_estate">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>Choose Us</span>
+      </a>
+      <div id="choose" class="collapse
+
+      {{ ($route == 'choose_about.index') ? 'show' : '' }}
+      {{ ($route == 'choose_about.create') ? 'show' : '' }}
+      " aria-labelledby="headingPages" data-parent="#accordionSidebar">
+         <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item {{ ($route == 'choose_about.index') ? 'active' : '' }}" href="{{ route('choose_about.index') }}">Manage Choose</a>
+            <a class="collapse-item {{ ($route == 'choose_about.create') ? 'active' : '' }}" href="{{ route('choose_about.create') }}">Choose About Add</a>
          </div>
       </div>
    </li>

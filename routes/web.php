@@ -8,6 +8,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\FeaturedProjectContoller;
 use App\Http\Controllers\Backend\MenuController;
+use App\Http\Controllers\Backend\BannerController;
+use App\Http\Controllers\Backend\ChooseController;
 use App\Http\Controllers\Frontend\FrontendController;
 
 
@@ -77,7 +79,7 @@ Route::middleware(['auth','role:admin'])->group(function() {
     //     Route::get('/category-active/{id}', [CategoryController::class, 'active'])->name('category.active');
     //     Route::get('/category-inactive/{id}', [CategoryController::class, 'inactive'])->name('category.in_active');
 
-    // }); 
+    // });
 
     Route::group(['prefix'=>'menu'], function(){
         Route::get('/index', [MenuController::class, 'index'])->name('menu.index');
@@ -112,6 +114,18 @@ Route::middleware(['auth','role:admin'])->group(function() {
 
     });
 
+    Route::group(['prefix'=>'banner'], function(){
+        Route::get('/index', [BannerController::class, 'index'])->name('banner.index');
+        Route::get('/create', [BannerController::class, 'create'])->name('banner.create');
+        Route::post('/store', [BannerController::class, 'store'])->name('banner.store');
+        Route::get('/edit/{id}', [BannerController::class, 'edit'])->name('banner.edit');
+        Route::post('/update/{id}', [BannerController::class, 'update'])->name('banner.update');
+        Route::get('/destroy/{id}', [BannerController::class, 'destroy'])->name('banner.destroy');
+        Route::get('/banner-active/{id}', [BannerController::class, 'active'])->name('banner.active');
+        Route::get('/banner-inactive/{id}', [BannerController::class, 'inactive'])->name('banner.in_active');
+
+    });
+
     Route::group(['prefix'=>'project'], function(){
 
         Route::get('/featured/descriptio/', [FeaturedProjectContoller::class, 'descriptio_index'])->name('project.description.index');
@@ -122,7 +136,7 @@ Route::middleware(['auth','role:admin'])->group(function() {
         Route::get('/featured/descriptio/destroy/{id}', [FeaturedProjectContoller::class, 'descriptio_destroy'])->name('project.description.destroy');
         Route::get('/featured/descriptio/menu-active/{id}', [FeaturedProjectContoller::class, 'descriptio_active'])->name('project.description.active');
         Route::get('/featured/descriptio/menu-inactive/{id}', [FeaturedProjectContoller::class, 'descriptio_inactive'])->name('project.description.in_active');
-        
+
         Route::get('/index', [FeaturedProjectContoller::class, 'index'])->name('project.index');
         Route::get('/create', [FeaturedProjectContoller::class, 'create'])->name('project.create');
         Route::post('/store', [FeaturedProjectContoller::class, 'store'])->name('project.store');
@@ -131,9 +145,21 @@ Route::middleware(['auth','role:admin'])->group(function() {
         Route::get('/destroy/{id}', [FeaturedProjectContoller::class, 'destroy'])->name('project.destroy');
         Route::get('/menu-active/{id}', [FeaturedProjectContoller::class, 'active'])->name('project.active');
         Route::get('/menu-inactive/{id}', [FeaturedProjectContoller::class, 'inactive'])->name('project.in_active');
-        
 
-    }); 
+
+    });
+
+    Route::group(['prefix'=>'choose'], function(){
+        Route::get('/index', [ChooseController::class, 'index'])->name('choose_about.index');
+        Route::get('/choose-about-create', [ChooseController::class, 'create'])->name('choose_about.create');
+        Route::post('/store', [ChooseController::class, 'store'])->name('choose_about.store');
+        Route::get('/edit/{id}', [ChooseController::class, 'edit'])->name('choose.edit');
+        Route::post('/update/{id}', [ChooseController::class, 'update'])->name('choose_about.update');
+        Route::get('/destroy/{id}', [ChooseController::class, 'destroy'])->name('choose.destroy');
+        Route::get('/choose-active/{id}', [ChooseController::class, 'active'])->name('choose.active');
+        Route::get('/choose-inactive/{id}', [ChooseController::class, 'inactive'])->name('choose.in_active');
+
+    });
 
 
 
