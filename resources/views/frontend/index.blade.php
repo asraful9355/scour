@@ -462,14 +462,18 @@ $banners = App\Models\Banner::where('status', 1)->latest()->get();
                         </div><!-- .col-md-8 end -->
                         @php
                         $categories = App\Models\Category::where('status', 1)->latest()->get();
+                        $works = App\Models\Work::where('status', 1)->latest()->get();
                         @endphp
                         <div class="col-md-12">
 
                             <ul class="portfolio-categories">
-                                <li><a data-filter="*" class="active" href="#">All</a></li>
-                                @foreach($categories as $cat)
-                                <li><a data-filter=".pi-world-tour" href="{{ route('category.featured',$cat->id) }}">{{ $cat->category_name_en }}</a></li>
-                                @endforeach
+                                <li><a data-filter="*" class="active" href="#all">All</a></li>
+                                @forelse($categories as $cat)
+                                <li><a data-filter=".pi-world-tour" href="#category{{$cat->id}}">{{ $cat->category_name_en }}</a></li>
+                                @empty
+                                <h5 class="text-danger">No Category Found</h5>
+                                @endforelse
+
                             </ul>
 
                         </div><!-- .col-md-12 end -->
@@ -481,109 +485,30 @@ $banners = App\Models\Banner::where('status', 1)->latest()->get();
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
-
+                    
                                 <div class="portfolio-items">
+                                    @forelse($works as $work)
                                     <div class="portfolio-item pi-world-tour">
                                         <div class="preview img-bg">
-                                            <img src="http://via.placeholder.com/450x300?text=Image" alt="">
+                                            <img src="{{ asset($work->work_image) }}" alt="">
                                         </div><!-- .preview end -->
                                         <a class="overlay" href="#">
                                             <div class="overlay-inner">
-                                                <span class="sub-title">Interior</span>
-                                                <h4>Art Of Building</h4>
+                                                <span class="sub-title">{{ $work->title_en ?? 'NULL' }}</span>
+                                                <h4>{{ $work->description_en ?? 'NULL' }}</h4>
                                             </div><!-- .overlay-inner end -->
                                         </a><!-- .overlay end -->
                                         <div class="portfolio-single-link">
                                             <a class="open-portfolio-single" href="portfolio-single-1.html"></a>
                                         </div><!-- end portfolio-single-link -->
                                     </div><!-- .portfolio-item -->
-                                    <div class="portfolio-item pi-sport-tour">
-                                        <div class="preview img-bg">
-                                            <img src="http://via.placeholder.com/450x300?text=Image" alt="">
-                                        </div><!-- .preview end -->
-                                        <a class="overlay" href="#">
-                                            <div class="overlay-inner">
-                                                <span class="sub-title">Interior</span>
-                                                <h4>Art Of Building</h4>
-                                            </div><!-- .overlay-inner end -->
-                                        </a><!-- .overlay end -->
-                                        <div class="portfolio-single-link">
-                                            <a class="open-portfolio-single" href="portfolio-single-2.html"></a>
-                                        </div><!-- end portfolio-single-link -->
-                                    </div><!-- .portfolio-item -->
-                                    <div class="portfolio-item pi-summer-tour">
-                                        <div class="preview img-bg">
-                                            <img src="http://via.placeholder.com/450x300?text=Image" alt="">
-                                        </div><!-- .preview end -->
-                                        <a class="overlay" href="#">
-                                            <div class="overlay-inner">
-                                                <span class="sub-title">Interior</span>
-                                                <h4>Art Of Building</h4>
-                                            </div><!-- .overlay-inner end -->
-                                        </a><!-- .overlay end -->
-                                        <div class="portfolio-single-link">
-                                            <a class="open-portfolio-single" href="portfolio-single-3.html"></a>
-                                        </div><!-- end portfolio-single-link -->
-                                    </div><!-- .portfolio-item -->
-                                    <div class="portfolio-item pi-world-tour">
-                                        <div class="preview img-bg">
-                                            <img src="http://via.placeholder.com/450x300?text=Image" alt="">
-                                        </div><!-- .preview end -->
-                                        <a class="overlay" href="#">
-                                            <div class="overlay-inner">
-                                                <span class="sub-title">Interior</span>
-                                                <h4>Art Of Building</h4>
-                                            </div><!-- .overlay-inner end -->
-                                        </a><!-- .overlay end -->
-                                        <div class="portfolio-single-link">
-                                            <a class="open-portfolio-single" href="portfolio-single-4.html"></a>
-                                        </div><!-- end portfolio-single-link -->
-                                    </div><!-- .portfolio-item -->
-                                    <div class="portfolio-item pi-summer-tour pi-summer-trip">
-                                        <div class="preview img-bg">
-                                            <img src="http://via.placeholder.com/450x300?text=Image" alt="">
-                                        </div><!-- .preview end -->
-                                        <a class="overlay lightbox-gallery" href="{{ asset('frontend/images/files/portfolio/lightbox/img-5.jpg')}}">
-                                            <div class="overlay-inner">
-                                                <span class="sub-title">Interior</span>
-                                                <h4>Art Of Building</h4>
-                                            </div><!-- .overlay-inner end -->
-                                        </a><!-- .overlay end -->
-                                    </div><!-- .portfolio-item -->
-                                    <div class="portfolio-item pi-ocean-tour">
-                                        <div class="preview img-bg">
-                                            <img src="http://via.placeholder.com/450x300?text=Image" alt="">
-                                        </div><!-- .preview end -->
-                                        <a class="overlay lightbox-gallery" href="{{ asset('frontend/images/files/portfolio/lightbox/img-6.jpg')}}">
-                                            <div class="overlay-inner">
-                                                <span class="sub-title">Interior</span>
-                                                <h4>Art Of Building</h4>
-                                            </div><!-- .overlay-inner end -->
-                                        </a><!-- .overlay end -->
-                                    </div><!-- .portfolio-item -->
-                                    <div class="portfolio-item pi-sport-tour">
-                                        <div class="preview img-bg">
-                                            <img src="http://via.placeholder.com/450x300?text=Image" alt="">
-                                        </div><!-- .preview end -->
-                                        <a class="overlay lightbox-gallery" href="{{ asset('frontend/images/files/portfolio/lightbox/img-7.jpg')}}">
-                                            <div class="overlay-inner">
-                                                <span class="sub-title">Interior</span>
-                                                <h4>Art Of Building</h4>
-                                            </div><!-- .overlay-inner end -->
-                                        </a><!-- .overlay end -->
-                                    </div><!-- .portfolio-item -->
-                                    <div class="portfolio-item pi-ocean-tour">
-                                        <div class="preview img-bg">
-                                            <img src="http://via.placeholder.com/450x300?text=Image" alt="">
-                                        </div><!-- .preview end -->
-                                        <a class="overlay lightbox-gallery" href="{{ asset('frontend/images/files/portfolio/lightbox/img-8.jpg')}}">
-                                            <div class="overlay-inner">
-                                                <span class="sub-title">Interior</span>
-                                                <h4>Art Of Building</h4>
-                                            </div><!-- .overlay-inner end -->
-                                        </a><!-- .overlay end -->
-                                    </div><!-- .portfolio-item -->
-                                </div><!-- .portfolio-items end -->
+                                    @empty
+                                    <h5 class="text-danger">No Works Found</h5>
+                                    @endforelse
+
+                                </div>
+                                <!-- .portfolio-items end -->
+
                             </div><!-- .col-md-12 end -->
                         </div><!-- .row end -->
                     </div><!-- .container-fluid end -->

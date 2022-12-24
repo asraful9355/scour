@@ -33,6 +33,11 @@ use App\Http\Controllers\Frontend\FrontendController;
 */
 Route::get('/',[FrontendController::class, 'index']);
 
+// Route::get('/test', function(){ 
+// 	return App\Models\Category::find(1)->works;
+//  });
+
+
 // User Dashboard
 Route::middleware(['auth'])->group(function() {
 
@@ -87,7 +92,7 @@ Route::middleware(['auth','role:admin'])->group(function() {
         Route::get('/category-active/{id}', [CategoryController::class, 'active'])->name('category.active');
         Route::get('/category-inactive/{id}', [CategoryController::class, 'inactive'])->name('category.in_active');
         // category wise featured
-        Route::get('/wise-featured/{id}', [CategoryController::class, 'category_wise'])->name('category.featured');
+        // Route::get('/wise-featured/', [CategoryController::class, 'category_wise'])->name('category.featured');
 
 
     });

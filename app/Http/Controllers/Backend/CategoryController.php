@@ -153,8 +153,7 @@ class CategoryController extends Controller
         return redirect()->back();
     }
     public function category_wise($id){
-        dd($request->id);
-
+        dd($id);
 
     }
 }
