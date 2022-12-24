@@ -172,68 +172,43 @@ $banners = App\Models\Banner::where('status', 1)->latest()->get();
 
                 <div class="container">
                     <div class="row">
+                        @php
+                        $about_description = App\Models\AboutDescription::where('status', 1)->first();
+                        $abouts = App\Models\About::where('status', 1)->orderBy('id', 'DESC')->get();
+                        @endphp
+
                         <div class="col-md-8 col-md-offset-2">
 
                             <div class="section-title text-center anim-fadeIn">
                                 <h2>About Scour Company</h2>
                                 <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                                    {!! $about_description-> about_descrption_en ?? 'NULL' !!}
                                 </p>
                             </div><!-- .section-title end -->
 
-                        </div><!-- .col-md-8 end -->
+                        </div><!-- .col-md-8 end -->  
+
+                        @forelse($abouts->take(4) as $about)
                         <div class="col-md-3 text-center">
 
                             <div class="box-preview-1 anim-fadeIn mb-md-50">
                                 <div class="box-img img-bg">
-                                    <a href="#"><img src="http://via.placeholder.com/350x150?text=Image" alt=""></a>
+                                    <a href="#"><img src="{{ asset($about->about_image) }}" alt="about_image"></a>
                                 </div><!-- .box-img end -->
                                 <div class="box-content">
-                                    <h5><a href="#">Project Management</a></h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ever since the 1500s.</p>
+                                    <h5><a href="#">{{ $about->about_title_en ?? 'NULL' }}</a></h5>
+                                    <p>{!! $about->about_description_en ?? 'NULL' !!}.</p>
                                 </div><!-- .box-content end -->
                             </div><!-- .box-preview-1 end -->
 
                         </div><!-- .col-md-3 end -->
-                        <div class="col-md-3 text-center">
+                        @empty
+                            <h5 class="text-danger">No About Found</h5>
+                        @endforelse
 
-                            <div class="box-preview-1 anim-fadeIn mb-md-50">
-                                <div class="box-img img-bg">
-                                    <a href="#"><img src="http://via.placeholder.com/350x150?text=Image" alt=""></a>
-                                </div><!-- .box-img end -->
-                                <div class="box-content">
-                                    <h5><a href="#">Tiling & Painting</a></h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ever since the 1500s.</p>
-                                </div><!-- .box-content end -->
-                            </div><!-- .box-preview-1 end -->
+                        
 
-                        </div><!-- .col-md-3 end -->
-                        <div class="col-md-3 text-center">
 
-                            <div class="box-preview-1 anim-fadeIn mb-md-50">
-                                <div class="box-img img-bg">
-                                    <a href="#"><img src="http://via.placeholder.com/350x150?text=Image" alt=""></a>
-                                </div><!-- .box-img end -->
-                                <div class="box-content">
-                                    <h5><a href="#">Design & Build</a></h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ever since the 1500s.</p>
-                                </div><!-- .box-content end -->
-                            </div><!-- .box-preview-1 end -->
-
-                        </div><!-- .col-md-3 end -->
-                        <div class="col-md-3 text-center">
-
-                            <div class="box-preview-1 anim-fadeIn">
-                                <div class="box-img img-bg">
-                                    <a href="#"><img src="http://via.placeholder.com/350x150?text=Image" alt=""></a>
-                                </div><!-- .box-img end -->
-                                <div class="box-content">
-                                    <h5><a href="#">Building Renovation</a></h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ever since the 1500s.</p>
-                                </div><!-- .box-content end -->
-                            </div><!-- .box-preview-1 end -->
-
-                        </div><!-- .col-md-3 end -->
                         <div class="col-md-12">
 
                             <div class="about-us-boxes-info">
@@ -305,12 +280,16 @@ $banners = App\Models\Banner::where('status', 1)->latest()->get();
 
                 <div class="container">
                     <div class="row">
+                        @php
+                        $project_description = App\Models\FeaturedProjectDescription::where('status', 1)->first();
+                        $projects = App\Models\FeaturedProject::where('status', 1)->orderBy('id', 'DESC')->get();
+                        @endphp
                         <div class="col-md-8 col-md-offset-2">
 
                             <div class="section-title text-center">
                                 <h2>Our Featured Projects</h2>
                                 <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                                    {!! $project_description->featured_project_descrption_en ?? 'NULL' !!}
                                 </p>
                             </div><!-- .section-title end -->
 
@@ -319,71 +298,24 @@ $banners = App\Models\Banner::where('status', 1)->latest()->get();
 
                             <div class="featured-projects-slider">
                                 <ul class="owl-carousel">
+                                    @forelse($projects->take(7) as $project)
                                     <li>
                                         <div class="slide">
                                             <div class="box-preview-2">
                                                 <div class="box-img img-bg">
-                                                    <a href="#"><img src="http://via.placeholder.com/350x150?text=Image" alt=""></a>
+                                                    <a href="#"><img src="{{ asset($project->image) }}" alt="project_image"></a>
                                                 </div><!-- .box-img end -->
                                                 <div class="box-content">
-                                                    <h5><a href="portfolio-single-page.html">House of Cards</a><span class="colored">Living Room</span></h5>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been indust.</p>
+                                                    <h5><a href="portfolio-single-page.html">{{ $project->title_en ?? 'NULL' }}</a><span class="colored">{{ $project->sub_title_en ?? 'NULL' }}</span></h5>
+                                                    <p>{!! $project->desccription_en ?? 'NULL' !!}</p>
                                                 </div><!-- .box-content end -->
                                             </div><!-- .box-preview-2 end -->
                                         </div><!-- .slide end -->
                                     </li>
-                                    <li>
-                                        <div class="slide">
-                                            <div class="box-preview-2">
-                                                <div class="box-img img-bg">
-                                                    <a href="#"><img src="http://via.placeholder.com/350x150?text=Image" alt=""></a>
-                                                </div><!-- .box-img end -->
-                                                <div class="box-content">
-                                                        <h5><a href="portfolio-single-page.html">Rozay Kitchen</a><span class="colored">Kitchen</span></h5>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been indust.</p>
-                                                </div><!-- .box-content end -->
-                                            </div><!-- .box-preview-2 end -->
-                                        </div><!-- .slide end -->
-                                    </li>
-                                    <li>
-                                        <div class="slide">
-                                            <div class="box-preview-2">
-                                                <div class="box-img img-bg">
-                                                    <a href="#"><img src="http://via.placeholder.com/350x150?text=Image" alt=""></a>
-                                                </div><!-- .box-img end -->
-                                                <div class="box-content">
-                                                        <h5><a href="portfolio-single-page.html">Green House</a><span class="colored">Building</span></h5>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been indust.</p>
-                                                </div><!-- .box-content end -->
-                                            </div><!-- .box-preview-2 end -->
-                                        </div><!-- .slide end -->
-                                    </li>
-                                    <li>
-                                        <div class="slide">
-                                            <div class="box-preview-2">
-                                                <div class="box-img img-bg">
-                                                    <a href="#"><img src="http://via.placeholder.com/350x150?text=Image" alt=""></a>
-                                                </div><!-- .box-img end -->
-                                                <div class="box-content">
-                                                        <h5><a href="portfolio-single-page.html">House of Cards</a><span class="colored">Living Room</span></h5>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been indust.</p>
-                                                </div><!-- .box-content end -->
-                                            </div><!-- .box-preview-2 end -->
-                                        </div><!-- .slide end -->
-                                    </li>
-                                    <li>
-                                        <div class="slide">
-                                            <div class="box-preview-2">
-                                                <div class="box-img img-bg">
-                                                    <a href="#"><img src="http://via.placeholder.com/350x150?text=Image" alt=""></a>
-                                                </div><!-- .box-img end -->
-                                                <div class="box-content">
-                                                        <h5><a href="portfolio-single-page.html">Rozay Kitchen</a><span class="colored">Kitchen</span></h5>
-                                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been indust.</p>
-                                                </div><!-- .box-content end -->
-                                            </div><!-- .box-preview-2 end -->
-                                        </div><!-- .slide end -->
-                                    </li>
+                                    @empty
+                                    <h5 class="text-danger">No Project Found</h5>
+                                    @endforelse
+                                    
                                 </ul>
                             </div><!-- .featured-projects-slider end -->
 
@@ -462,12 +394,17 @@ $banners = App\Models\Banner::where('status', 1)->latest()->get();
 
                 <div class="container">
                     <div class="row">
+                        @php
+                        $service_description = App\Models\ServiceDescription::where('status', 1)->first();
+                        $services = App\Models\Service::where('status', 1)->orderBy('id', 'DESC')->get();
+                        @endphp
+
                         <div class="col-md-8 col-md-offset-2">
 
                             <div class="section-title text-center">
                                 <h2>Our Services</h2>
                                 <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                                    {!! $service_description->service_descrption_en ?? 'NULL' !!}
                                 </p>
                             </div><!-- .section-title end -->
 
@@ -475,61 +412,29 @@ $banners = App\Models\Banner::where('status', 1)->latest()->get();
                         <div class="col-md-12">
 
                             <div class="img-preview img-bg anim-moveUp">
-                                <img src="http://via.placeholder.com/1200x450?text=Image" alt="">
+                                <img src="{{ asset($service_description->image ?? 'NULL') }}" alt="description_image">
                             </div><!-- .img-preview end -->
 
                         </div><!-- .col-md-12 end -->
+
+                        @forelse($services->take(4) as $service)                    
                         <div class="col-md-3 text-center">
                             <div class="box-preview-1 anim-moveUp mb-md-50">
                                 <div class="box-img img-bg">
-                                    <a href="#"><img src="http://via.placeholder.com/350x150?text=Image" alt=""></a>
+                                    <a href="#"><img src="{{ asset($service->image) }}" alt=""></a>
                                 </div><!-- .box-img end -->
                                 <div class="box-content">
-                                    <h5><a href="#">Project Management</a></h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ever since the 1500s.</p>
+                                    <h5><a href="#">{{ $service->title_en ?? 'NULL' }}t</a></h5>
+                                    <p>{!! $service->description_en ?? 'NULL' !!}</p>
                                 </div><!-- .box-content end -->
                             </div><!-- .box-preview-1 end -->
 
                         </div><!-- .col-md-3 end -->
-                        <div class="col-md-3 text-center">
+                        @empty
+                            <h5 class="text-danger">No Service Found</h5>
+                        @endforelse
 
-                            <div class="box-preview-1 anim-moveUp mb-md-50">
-                                <div class="box-img img-bg">
-                                    <a href="#"><img src="http://via.placeholder.com/350x150?text=Image" alt=""></a>
-                                </div><!-- .box-img end -->
-                                <div class="box-content">
-                                    <h5><a href="#">Tiling & Painting</a></h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ever since the 1500s.</p>
-                                </div><!-- .box-content end -->
-                            </div><!-- .box-preview-1 end -->
-
-                        </div><!-- .col-md-3 end -->
-                        <div class="col-md-3 text-center">
-
-                            <div class="box-preview-1 anim-moveUp mb-md-50">
-                                <div class="box-img img-bg">
-                                    <a href="#"><img src="http://via.placeholder.com/350x150?text=Image" alt=""></a>
-                                </div><!-- .box-img end -->
-                                <div class="box-content">
-                                    <h5><a href="#">Design & Build</a></h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ever since the 1500s.</p>
-                                </div><!-- .box-content end -->
-                            </div><!-- .box-preview-1 end -->
-
-                        </div><!-- .col-md-3 end -->
-                        <div class="col-md-3 text-center">
-
-                            <div class="box-preview-1 anim-moveUp">
-                                <div class="box-img img-bg">
-                                    <a href="#"><img src="http://via.placeholder.com/350x150?text=Image" alt=""></a>
-                                </div><!-- .box-img end -->
-                                <div class="box-content">
-                                    <h5><a href="#">Building Renovation</a></h5>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ever since the 1500s.</p>
-                                </div><!-- .box-content end -->
-                            </div><!-- .box-preview-1 end -->
-
-                        </div><!-- .col-md-3 end -->
+                        
                     </div><!-- .row end -->
                 </div><!-- .container end -->
 
@@ -735,12 +640,16 @@ $banners = App\Models\Banner::where('status', 1)->latest()->get();
 
                 <div class="container">
                     <div class="row">
+                        @php
+                        $team_description = App\Models\TeamDescription::where('status', 1)->first();
+                        $teams = App\Models\Team::where('status', 1)->orderBy('id', 'DESC')->get();
+                        @endphp
                         <div class="col-md-8 col-md-offset-2">
 
                             <div class="section-title text-center">
                                 <h2>Our Great Team</h2>
                                 <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                                    {!! $team_description->team_descrption_en ?? 'NULL' !!}
                                 </p>
                             </div><!-- .section-title end -->
 
@@ -749,121 +658,34 @@ $banners = App\Models\Banner::where('status', 1)->latest()->get();
 
                             <div class="team-slider">
                                 <ul class="owl-carousel">
+                                    @forelse($teams->take(7) as $team)
                                     <li>
                                         <div class="slide">
                                             <div class="box-preview-2 team-member">
                                                 <div class="box-img img-bg">
-                                                    <a href="#"><img src="http://via.placeholder.com/350x380?text=Image" alt=""></a>
+                                                    <a href="#"><img src="{{ asset($team->image) }}" alt="team_image"></a>
                                                     <div class="overlay">
                                                         <div class="overlay-inner">
-                                                            <span class="sub-title">Founder</span>
-                                                            <h4>Ahmed Hamdy</h4>
+                                                            <span class="sub-title">{{ $team->title_en ?? 'Null' }}</span>
+                                                            <h4>{{ $team->name_en ?? 'Null' }}</h4>
                                                         </div><!-- .overlay-inner end -->
                                                     </div><!-- .overlay end -->
                                                 </div><!-- .box-img end -->
                                                 <div class="box-content">
                                                     <ul class="social-icons">
-                                                        <li><a class="si-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                                                        <li><a class="si-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                                                        <li><a class="si-behance" href="#"><i class="fa fa-behance"></i></a></li>
-                                                        <li><a class="si-contact" href="#"><i class="fa fa-envelope"></i></a></li>
+                                                        <li><a class="si-facebook" href="{{ $team->facebook_url ?? 'Null' }}"><i class="fa fa-facebook"></i></a></li>
+                                                        <li><a class="si-twitter" href="{{ $team->twitter_url ?? 'Null' }}"><i class="fa fa-twitter"></i></a></li>
+                                                        <li><a class="si-behance" href="{{ $team->behance_url ?? 'Null' }}"><i class="fa fa-behance"></i></a></li>
+                                                        <li><a class="si-contact" href="{{ $team->envelope_url ?? 'Null' }}"><i class="fa fa-envelope"></i></a></li>
                                                     </ul><!-- .social-icons end -->
                                                 </div><!-- .box-content end -->
                                             </div><!-- .box-preview-2 end -->
                                         </div><!-- .slide end -->
                                     </li>
-                                    <li>
-                                        <div class="slide">
-                                            <div class="box-preview-2 team-member">
-                                                <div class="box-img img-bg">
-                                                    <a href="#"><img src="http://via.placeholder.com/350x380?text=Image" alt=""></a>
-                                                    <div class="overlay">
-                                                        <div class="overlay-inner">
-                                                            <span class="sub-title">Developer</span>
-                                                            <h4>Morad Hamdy</h4>
-                                                        </div><!-- .overlay-inner end -->
-                                                    </div><!-- .overlay end -->
-                                                </div><!-- .box-img end -->
-                                                <div class="box-content">
-                                                    <ul class="social-icons">
-                                                        <li><a class="si-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                                                        <li><a class="si-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                                                        <li><a class="si-behance" href="#"><i class="fa fa-behance"></i></a></li>
-                                                        <li><a class="si-contact" href="#"><i class="fa fa-envelope"></i></a></li>
-                                                    </ul><!-- .social-icons end -->
-                                                </div><!-- .box-content end -->
-                                            </div><!-- .box-preview-2 end -->
-                                        </div><!-- .slide end -->
-                                    </li>
-                                    <li>
-                                        <div class="slide">
-                                            <div class="box-preview-2 team-member">
-                                                <div class="box-img img-bg">
-                                                    <a href="#"><img src="http://via.placeholder.com/350x380?text=Image" alt=""></a>
-                                                    <div class="overlay">
-                                                        <div class="overlay-inner">
-                                                            <span class="sub-title">Designer</span>
-                                                            <h4>Eslam Samer</h4>
-                                                        </div><!-- .overlay-inner end -->
-                                                    </div><!-- .overlay end -->
-                                                </div><!-- .box-img end -->
-                                                <div class="box-content">
-                                                    <ul class="social-icons">
-                                                        <li><a class="si-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                                                        <li><a class="si-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                                                        <li><a class="si-behance" href="#"><i class="fa fa-behance"></i></a></li>
-                                                        <li><a class="si-contact" href="#"><i class="fa fa-envelope"></i></a></li>
-                                                    </ul><!-- .social-icons end -->
-                                                </div><!-- .box-content end -->
-                                            </div><!-- .box-preview-2 end -->
-                                        </div><!-- .slide end -->
-                                    </li>
-                                    <li>
-                                        <div class="slide">
-                                            <div class="box-preview-2 team-member">
-                                                <div class="box-img img-bg">
-                                                    <a href="#"><img src="http://via.placeholder.com/350x380?text=Image" alt=""></a>
-                                                    <div class="overlay">
-                                                        <div class="overlay-inner">
-                                                            <span class="sub-title">Founder</span>
-                                                            <h4>Ahmed Hamdy</h4>
-                                                        </div><!-- .overlay-inner end -->
-                                                    </div><!-- .overlay end -->
-                                                </div><!-- .box-img end -->
-                                                <div class="box-content">
-                                                    <ul class="social-icons">
-                                                        <li><a class="si-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                                                        <li><a class="si-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                                                        <li><a class="si-behance" href="#"><i class="fa fa-behance"></i></a></li>
-                                                        <li><a class="si-contact" href="#"><i class="fa fa-envelope"></i></a></li>
-                                                    </ul><!-- .social-icons end -->
-                                                </div><!-- .box-content end -->
-                                            </div><!-- .box-preview-2 end -->
-                                        </div><!-- .slide end -->
-                                    </li>
-                                    <li>
-                                        <div class="slide">
-                                            <div class="box-preview-2 team-member">
-                                                <div class="box-img img-bg">
-                                                    <a href="#"><img src="http://via.placeholder.com/350x380?text=Image" alt=""></a>
-                                                    <div class="overlay">
-                                                        <div class="overlay-inner">
-                                                            <span class="sub-title">Developer</span>
-                                                            <h4>Morad Hamdy</h4>
-                                                        </div><!-- .overlay-inner end -->
-                                                    </div><!-- .overlay end -->
-                                                </div><!-- .box-img end -->
-                                                <div class="box-content">
-                                                    <ul class="social-icons">
-                                                        <li><a class="si-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                                                        <li><a class="si-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                                                        <li><a class="si-behance" href="#"><i class="fa fa-behance"></i></a></li>
-                                                        <li><a class="si-contact" href="#"><i class="fa fa-envelope"></i></a></li>
-                                                    </ul><!-- .social-icons end -->
-                                                </div><!-- .box-content end -->
-                                            </div><!-- .box-preview-2 end -->
-                                        </div><!-- .slide end -->
-                                    </li>
+                                    @empty
+                                    <h5 class="text-danger">No Team Found</h5>
+                                    @endforelse
+
                                 </ul>
                             </div><!-- .team-slider end -->
 
@@ -883,6 +705,10 @@ $banners = App\Models\Banner::where('status', 1)->latest()->get();
 
                 <div class="container">
                     <div class="row">
+                        @php
+                        $client_description = App\Models\ClientDescription::where('status', 1)->first();
+                        $clients = App\Models\Client::where('status', 1)->orderBy('id', 'DESC')->get();
+                        @endphp
                         <div class="section-content">
 
                             <div class="col-md-8 col-md-offset-2">
@@ -890,7 +716,7 @@ $banners = App\Models\Banner::where('status', 1)->latest()->get();
                                 <div class="section-title text-center white">
                                     <h2>Our Clients</h2>
                                     <p>
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                                        {!! $client_description->client_descrption_en ?? 'NULL' !!}
                                     </p>
                                 </div><!-- .section-title end -->
 
@@ -899,15 +725,16 @@ $banners = App\Models\Banner::where('status', 1)->latest()->get();
 
                                 <div class="testmonials-slider">
                                     <ul class="owl-carousel">
+                                        @forelse($clients->take(7) as $client)
                                         <li>
                                             <div class="slide">
                                                 <div class="testmonial-single">
                                                     <div class="ts-img">
-                                                        <img src="http://via.placeholder.com/70x70?text=Image" alt="">
+                                                        <img src="{{ asset($client->image) }}" alt="client_image">
                                                     </div><!-- .ts-img end -->
-                                                    <h5 class="ts-person">Ahmed Hamdy</h5>
+                                                    <h5 class="ts-person">{{ $client->name_en ?? 'NULL' }}</h5>
                                                     <div class="ts-content">
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                                                        {!! $client->description_en ?? 'NULL' !!}
                                                         <div class="rating">
                                                             <i class="fa fa-star"></i>
                                                             <i class="fa fa-star"></i>
@@ -919,86 +746,10 @@ $banners = App\Models\Banner::where('status', 1)->latest()->get();
                                                 </div><!-- .testmonial-single end -->
                                             </div><!-- .slide end -->
                                         </li>
-                                        <li>
-                                            <div class="slide">
-                                                <div class="testmonial-single">
-                                                    <div class="ts-img">
-                                                        <img src="http://via.placeholder.com/70x70?text=Image" alt="">
-                                                    </div><!-- .ts-img end -->
-                                                    <h5 class="ts-person">Morad Hamdy</h5>
-                                                    <div class="ts-content">
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                                                        <div class="rating">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                        </div><!-- .rating end -->
-                                                    </div><!-- .ts-content end -->
-                                                </div><!-- .testmonial-single end -->
-                                            </div><!-- .slide end -->
-                                        </li>
-                                        <li>
-                                            <div class="slide">
-                                                <div class="testmonial-single">
-                                                    <div class="ts-img">
-                                                        <img src="http://via.placeholder.com/70x70?text=Image" alt="">
-                                                    </div><!-- .ts-img end -->
-                                                    <h5 class="ts-person">Amr Sadek</h5>
-                                                    <div class="ts-content">
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                                                        <div class="rating">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                        </div><!-- .rating end -->
-                                                    </div><!-- .ts-content end -->
-                                                </div><!-- .testmonial-single end -->
-                                            </div><!-- .slide end -->
-                                        </li>
-                                        <li>
-                                            <div class="slide">
-                                                <div class="testmonial-single">
-                                                    <div class="ts-img">
-                                                        <img src="http://via.placeholder.com/70x70?text=Image" alt="">
-                                                    </div><!-- .ts-img end -->
-                                                    <h5 class="ts-person">Ahmed Hamdy</h5>
-                                                    <div class="ts-content">
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                                                        <div class="rating">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                        </div><!-- .rating end -->
-                                                    </div><!-- .ts-content end -->
-                                                </div><!-- .testmonial-single end -->
-                                            </div><!-- .slide end -->
-                                        </li>
-                                        <li>
-                                            <div class="slide">
-                                                <div class="testmonial-single">
-                                                    <div class="ts-img">
-                                                        <img src="http://via.placeholder.com/70x70?text=Image" alt="">
-                                                    </div><!-- .ts-img end -->
-                                                    <h5 class="ts-person">Morad Hamdy</h5>
-                                                    <div class="ts-content">
-                                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
-                                                        <div class="rating">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                        </div><!-- .rating end -->
-                                                    </div><!-- .ts-content end -->
-                                                </div><!-- .testmonial-single end -->
-                                            </div><!-- .slide end -->
-                                        </li>
+                                        @empty
+                                        <h5 class="text-danger">No Clients Found</h5>
+                                        @endforelse
+                                        
                                     </ul>
                                 </div><!-- .testmonials-slider end -->
 

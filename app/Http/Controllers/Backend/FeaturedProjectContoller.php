@@ -55,6 +55,9 @@ class FeaturedProjectContoller extends Controller
             $featured_pro_des->featured_project_descrption_bn = $request->featured_project_descrption_bn;
         }
 
+        if($request->status == Null){
+            $request->status = 0;
+        }
         $featured_pro_des->status = $request->status;
         $featured_pro_des->created_at = Carbon::now();
         $featured_pro_des->save();
@@ -100,6 +103,9 @@ class FeaturedProjectContoller extends Controller
             $featured_pro_des->featured_project_descrption_bn = $request->featured_project_descrption_bn;
         }
 
+        if($request->status == Null){
+            $request->status = 0;
+        }
         $featured_pro_des->status = $request->status;
         $featured_pro_des->updated_at = Carbon::now();
         $featured_pro_des->save();
@@ -177,8 +183,8 @@ class FeaturedProjectContoller extends Controller
     {
         // dd($request);
         $this->validate($request, [
-            'title_en' => 'required',
-            'sub_title_en' => 'required',
+            'title_en' => 'required|max:100|min:1',
+            'sub_title_en' => 'required|max:100|min:1',
             'image' => 'required',
             'desccription_en' => 'required',
         ]);
@@ -217,6 +223,10 @@ class FeaturedProjectContoller extends Controller
         $featured_image = 'upload/featured_porject/'.$name_gen;
 
         $project->image = $featured_image;
+
+        if($request->status == Null){
+            $request->status = 0;
+        }
         $project->status = $request->status;
         $project->slug = $slug;
         $project->created_at = Carbon::now();
@@ -261,8 +271,8 @@ class FeaturedProjectContoller extends Controller
     {
         // dd($request);
         $this->validate($request, [
-            'title_en' => 'required',
-            'sub_title_en' => 'required',
+            'title_en' => 'required|max:100|min:1',
+            'sub_title_en' => 'required|max:100|min:1',
             'desccription_en' => 'required',
         ]);
 
@@ -313,6 +323,10 @@ class FeaturedProjectContoller extends Controller
         }
 
         $project->image = $featured_image;
+
+        if($request->status == Null){
+            $request->status = 0;
+        }
         $project->status = $request->status;
         $project->slug = $slug;
         $project->updated_at = Carbon::now();

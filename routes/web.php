@@ -8,10 +8,15 @@ use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\WorkController;
+
+use App\Http\Controllers\Backend\ClientController;
+
 use App\Http\Controllers\Backend\FeaturedProjectContoller;
 use App\Http\Controllers\Backend\MenuController;
 use App\Http\Controllers\Backend\ChooseController;
 use App\Http\Controllers\Backend\ServiceController;
+
+use App\Http\Controllers\Backend\TeamController;
 
 use App\Http\Controllers\Frontend\FrontendController;
 
@@ -236,6 +241,50 @@ Route::middleware(['auth','role:admin'])->group(function() {
         Route::get('/description/destroy/{id}', [ServiceController::class, 'description_destroy'])->name('services.description.destroy');
         Route::get('/description/menu-active/{id}', [ServiceController::class, 'description_active'])->name('services.description.active');
         Route::get('/description/menu-inactive/{id}', [ServiceController::class, 'description_inactive'])->name('services.description.in_active');
+
+    });
+
+    Route::group(['prefix'=>'team'], function(){
+        Route::get('/index', [TeamController::class, 'index'])->name('team.index');
+        Route::get('/create', [TeamController::class, 'create'])->name('team.create');
+        Route::post('/store', [TeamController::class, 'store'])->name('team.store');
+        Route::get('/edit/{id}', [TeamController::class, 'edit'])->name('team.edit');
+        Route::post('/update/{id}', [TeamController::class, 'update'])->name('team.update');
+        Route::get('/destroy/{id}', [TeamController::class, 'destroy'])->name('team.destroy');
+        Route::get('/menu-active/{id}', [TeamController::class, 'active'])->name('team.active');
+        Route::get('/menu-inactive/{id}', [TeamController::class, 'inactive'])->name('team.in_active');
+
+        // ==== Description=========
+        Route::get('/description/', [TeamController::class, 'description_index'])->name('team.description.index');
+        Route::get('/description/create', [TeamController::class, 'description_create'])->name('team.description.create');
+        Route::post('/description/store', [TeamController::class, 'description_store'])->name('team.description.store');
+        Route::get('/description/edit/{id}', [TeamController::class, 'description_edit'])->name('team.description.edit');
+        Route::post('/description/update/{id}', [TeamController::class, 'description_update'])->name('team.description.update');
+        Route::get('/description/destroy/{id}', [TeamController::class, 'description_destroy'])->name('team.description.destroy');
+        Route::get('/description/menu-active/{id}', [TeamController::class, 'description_active'])->name('team.description.active');
+        Route::get('/description/menu-inactive/{id}', [TeamController::class, 'description_inactive'])->name('team.description.in_active');
+
+    });
+
+    Route::group(['prefix'=>'client'], function(){
+        Route::get('/index', [ClientController::class, 'index'])->name('client.index');
+        Route::get('/create', [ClientController::class, 'create'])->name('client.create');
+        Route::post('/store', [ClientController::class, 'store'])->name('client.store');
+        Route::get('/edit/{id}', [ClientController::class, 'edit'])->name('client.edit');
+        Route::post('/update/{id}', [ClientController::class, 'update'])->name('client.update');
+        Route::get('/destroy/{id}', [ClientController::class, 'destroy'])->name('client.destroy');
+        Route::get('/menu-active/{id}', [ClientController::class, 'active'])->name('client.active');
+        Route::get('/menu-inactive/{id}', [ClientController::class, 'inactive'])->name('client.in_active');
+
+        // ==== Description=========
+        Route::get('/description/', [ClientController::class, 'description_index'])->name('client.description.index');
+        Route::get('/description/create', [ClientController::class, 'description_create'])->name('client.description.create');
+        Route::post('/description/store', [ClientController::class, 'description_store'])->name('client.description.store');
+        Route::get('/description/edit/{id}', [ClientController::class, 'description_edit'])->name('client.description.edit');
+        Route::post('/description/update/{id}', [ClientController::class, 'description_update'])->name('client.description.update');
+        Route::get('/description/destroy/{id}', [ClientController::class, 'description_destroy'])->name('client.description.destroy');
+        Route::get('/description/menu-active/{id}', [ClientController::class, 'description_active'])->name('client.description.active');
+        Route::get('/description/menu-inactive/{id}', [ClientController::class, 'description_inactive'])->name('client.description.in_active');
 
     });
 
