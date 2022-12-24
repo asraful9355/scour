@@ -204,7 +204,7 @@ class AboutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function descriptio_index()
+    public function description_index()
     {
         $descriptions = AboutDescription::latest()->get();
         return view('backend.about.description_index', compact('descriptions'));
@@ -215,9 +215,9 @@ class AboutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function descriptio_create()
+    public function description_create()
     {
-        return view('backend.about.descriptio_create');
+        return view('backend.about.description_create');
     }
 
     /**
@@ -226,7 +226,7 @@ class AboutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function descriptio_store(Request $request)
+    public function description_store(Request $request)
     {
         //  dd($request);
          $this->validate($request, [
@@ -257,7 +257,7 @@ class AboutController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function descriptio_edit($id)
+    public function description_edit($id)
     {
         $description = AboutDescription::find($id);
         return view('backend.about.description_edit', compact('description'));
@@ -270,7 +270,7 @@ class AboutController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function descriptio_update(Request $request, $id)
+    public function description_update(Request $request, $id)
     {
         //  dd($request);
         $this->validate($request, [
@@ -299,7 +299,7 @@ class AboutController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function descriptio_destroy($id)
+    public function description_destroy($id)
     {
         $description = AboutDescription::find($id);
         $description->delete();
@@ -308,7 +308,7 @@ class AboutController extends Controller
 
     }
 
-    public function descriptio_active($id){
+    public function description_active($id){
 
         $description = AboutDescription::find($id);
         $description->status = 1;
@@ -318,7 +318,7 @@ class AboutController extends Controller
         return redirect()->back();
     }
 
-    public function descriptio_inactive($id){
+    public function description_inactive($id){
         $description = AboutDescription::find($id);
         $description->status = 0;
         $description->save();

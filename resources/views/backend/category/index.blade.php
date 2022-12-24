@@ -1,5 +1,5 @@
 @extends('layouts.app2')
-@section('content')
+@section('admin')
 <div class="container-fluid">
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800 text-right"><a href="{{ route('category.create') }}" class="btn btn-primary"><i class="fas fa-plus" aria-hidden="true"></i> Create</a></h1>

@@ -15,6 +15,10 @@ class CreateChooseDescriptionsTable extends Migration
     {
         Schema::create('choose_descriptions', function (Blueprint $table) {
             $table->id();
+            $table->text('description_en')->nullable();
+            $table->text('description_bn')->nullable();
+            $table->string('video');
+            $table->unsignedTinyInteger('status')->default(1)->comment('1=>Active, 0=>Inactive');
             $table->timestamps();
         });
     }

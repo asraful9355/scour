@@ -62,7 +62,7 @@ class CategoryController extends Controller
 
         ]);
         Session::flash('success', 'Category Inserted Successfully');
-        return redirect()->back();
+        return redirect()->route('category.index');
     } // End Store Mathod
 
     /**
@@ -151,5 +151,10 @@ class CategoryController extends Controller
 
         Session::flash('success','category Disabled Successfully.');
         return redirect()->back();
+    }
+    public function category_wise($id){
+        dd($request->id);
+
+
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\choose;
+use App\Models\ChooseDescription;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Carbon;
@@ -125,6 +126,8 @@ class ChooseController extends Controller
             $choose->description_bn = $request->description_bn;
         }
 
+
+
         $choose->status = $request->status;
         $choose->slug = $slug;
         $choose->icon_url = $request->icon_url;
@@ -162,6 +165,7 @@ class ChooseController extends Controller
         return redirect()->back();
     }
 
+
     public function inactive($id){
         $choose = Choose::find($id);
         $choose->status = 0;
@@ -169,5 +173,101 @@ class ChooseController extends Controller
 
         Session::flash('success','Choose About Disabled Successfully.');
         return redirect()->back();
+    }
+
+
+
+
+    public function index_des(){
+        $choose_des = ChooseDescription::all();
+        return view('backend.choose_des.index',compact('choose_des'));
+    }
+    public function create_des(){
+        return view('backend.choose_des.create');
+    }
+    public function store_des(Request $request){
+        $this->validate($request, [
+            'description_en' => 'required',
+            'video' => 'required',
+        ]);
+
+        $choose_des = new ChooseDescription();
+
+
+
+        $choose_des->description_en = $request->description_en;
+        if($request->description_bn == ''){
+            $choose_des->description_bn = $request->description_en;
+        }else{
+            $choose_des->description_bn = $request->description_bn;
+        }
+        if($request->status == Null){
+            $request->status = 0;
+        }
+        $choose_des->status = $request->status;
+        $choose_des->video = $request->video;
+        $choose_des->created_at = Carbon::now();
+
+        $choose_des->save();
+
+        Session::flash('success', 'Choose Description Inserted Successfully');
+        return redirect()->route('choose_des.index');
+    }
+
+    public function destroy_des($id)
+    {
+        $choose_des = ChooseDescription::find($id);
+        // $file = $choose_des->video;
+        // if($file== true){
+        //     unlink($file);
+        // }
+
+        $choose_des->delete();
+
+        Session::flash('success','Choose Description Deleted Successfully.');
+        return redirect()->route('choose_des.index');
+    }
+    public function edit_des($id)
+    {
+        $choose_des = ChooseDescription::find($id);
+        return view('backend.choose_des.edit',compact('choose_des'));
+    }
+
+    public function update_des(Request $request, $id){
+        $choose_des = ChooseDescription::find($id);
+
+
+        $choose_des->description_en = $request->description_en;
+        if($request->description_bn == ''){
+            $choose_des->description_bn = $request->description_en;
+        }else{
+            $choose_des->description_bn = $request->description_bn;
+        }
+        if($request->status == Null){
+           $request->status = 0;
+         }
+        $choose_des->status = $request->status;
+        $choose_des->video = $request->video;
+        $choose_des->created_at = Carbon::now();
+        $choose_des->save();
+        Session::flash('success','Choose Description Updated Successfully.');
+        return redirect()->back();
+    }
+    public function inactive_des($id){
+        $choose_des = ChooseDescription::find($id);
+        $choose_des->status = 0;
+        $choose_des->save();
+
+        Session::flash('success','Choose Description Disabled Successfully.');
+        return redirect()->route('choose_des.index');
+    }
+
+    public function active_des($id){
+        $choose_des = ChooseDescription::find($id);
+        $choose_des->status = 1;
+        $choose_des->save();
+
+        Session::flash('success','Choose Description Active Successfully.');
+        return redirect()->route('choose_des.index');
     }
 }

@@ -9,4 +9,8 @@ class Category extends Model
 {
     use HasFactory;
     protected $guarded =[];
+    public function works()
+    {
+        return $this->hasMany('App\Models\Work');
+    }
 }

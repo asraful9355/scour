@@ -18,6 +18,9 @@ Scour
 
 <!-- Banner
 ============================================= -->
+@php
+$banners = App\Models\Banner::where('status', 1)->latest()->get();
+@endphp
 <section id="banner">
 
     <div class="banner-parallax" data-scroll-index="0">
@@ -32,17 +35,17 @@ Scour
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-10 col-md-offset-1">
-
+                                     @foreach($banners as $banner)
                                         <div class="banner-center-box text-center">
                                             <h1>
-                                                <span class="colored">Great Experiences<br>For Building and Reconstruction</span>
+                                                <span class="colored">  {{ $banner->title_en }}</span>
                                             </h1>
                                             <div class="description">
-                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing industry.
+                                                {!! $banner->description_en !!}
                                             </div>
-                                            <a class="btn colorful large hover-colorful" href="#">What We Do</a>
+                                            <a class="btn colorful large hover-colorful" href="#">  {{ $banner->button_name_en }}</a>
                                         </div><!-- .banner-center-box end -->
-
+                                      @endforeach
                                     </div><!-- .col-md-10 end -->
                                 </div><!-- .row end -->
                             </div><!-- .container end -->
@@ -391,7 +394,12 @@ Scour
             </div><!-- .section-content end -->
 
         </div><!-- .flat-section end -->
-
+        @php
+        $chooses = App\Models\Choose::where('status', 1)->limit(4)->get();
+        @endphp
+        @php
+        $choose_description = App\Models\ChooseDescription::where('status', 1)->limit(1)->get();
+        @endphp
         <!-- === Why Choose Us =========== -->
         <div id="why-choose-us" class="flat-section why-choose-us" data-scroll-index="2">
 
@@ -399,13 +407,14 @@ Scour
 
                 <div class="container">
                     <div class="row">
+                        @foreach($choose_description as $choose_des)
                         <div class="col-md-6">
 
                             <div class="video-preview">
-                                <a class="img-bg lightbox-iframe" href="https://vimeo.com/45830194">
+                                <a class="img-bg lightbox-iframe" href="{{ $choose_des->video }}">
                                     <img src="http://via.placeholder.com/600x350?text=Image" alt="">
                                 </a><!-- .img-bg end -->
-                                <a class="btn-video lightbox-iframe" href="https://vimeo.com/45830194">
+                                <a class="btn-video lightbox-iframe" href="{{ $choose_des->video }}">
                                     <i class="fa fa-play"></i>
                                 </a><!-- .video-btn end -->
                             </div><!-- .video-preview end -->
@@ -416,58 +425,29 @@ Scour
                             <div class="section-title mt-50">
                                 <h2>Why Choose Us</h2>
                                 <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                                   {!! $choose_des->description_en !!}
+
                                 </p>
                             </div><!-- .section-title end -->
 
                             <div class="row">
+                             @foreach($chooses as $choose)
                                 <div class="col-sm-6">
 
                                     <div class="box-info-2 mb-50">
-                                        <div class="box-icon"><img src="{{ asset('frontend/images/files/why-choose-us/box-info-2/img-1.png')}}" alt=""></div>
+                                        <div class="box-icon">{!! $choose->icon_url !!}</div>
                                         <div class="box-content">
-                                            <h5>Professional Approach</h5>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                                            <h5>{{ $choose->title_en }}</h5>
+                                            <p>{{ $choose->description_en }}</p>
                                         </div><!-- .box-content end -->
                                     </div><!-- .box-info-2 end -->
 
                                 </div><!-- .col-md-6 end -->
-                                <div class="col-sm-6">
-
-                                    <div class="box-info-2 mb-50">
-                                        <div class="box-icon"><img src="{{ asset('frontend/images/files/why-choose-us/box-info-2/img-2.png')}}" alt=""></div>
-                                        <div class="box-content">
-                                            <h5>Expert & Professional</h5>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                        </div><!-- .box-content end -->
-                                    </div><!-- .box-info-2 end -->
-
-                                </div><!-- .col-md-6 end -->
-                                <div class="col-sm-6">
-
-                                    <div class="box-info-2 mb-md-50">
-                                        <div class="box-icon"><img src="{{ asset('frontend/images/files/why-choose-us/box-info-2/img-3.png')}}" alt=""></div>
-                                        <div class="box-content">
-                                            <h5>Expert & Professional</h5>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                        </div><!-- .box-content end -->
-                                    </div><!-- .box-info-2 end -->
-
-                                </div><!-- .col-md-6 end -->
-                                <div class="col-sm-6">
-
-                                    <div class="box-info-2">
-                                        <div class="box-icon"><img src="{{ asset('frontend/images/files/why-choose-us/box-info-2/img-4.png')}}" alt=""></div>
-                                        <div class="box-content">
-                                            <h5>24/7 Emergency</h5>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                                        </div><!-- .box-content end -->
-                                    </div><!-- .box-info-2 end -->
-
-                                </div><!-- .col-md-6 end -->
+                               @endforeach
                             </div><!-- .row end -->
 
                         </div><!-- .col-md-6 end -->
+                        @endforeach
                     </div><!-- .row end -->
                 </div><!-- .container end -->
 
@@ -575,14 +555,16 @@ Scour
                             </div><!-- .section-title end -->
 
                         </div><!-- .col-md-8 end -->
+                        @php
+                        $categories = App\Models\Category::where('status', 1)->latest()->get();
+                        @endphp
                         <div class="col-md-12">
 
                             <ul class="portfolio-categories">
                                 <li><a data-filter="*" class="active" href="#">All</a></li>
-                                <li><a data-filter=".pi-world-tour" href="#">Interior</a></li>
-                                <li><a data-filter=".pi-ocean-tour" href="#">Landscaping</a></li>
-                                <li><a data-filter=".pi-summer-trip" href="#">Renovation</a></li>
-                                <li><a data-filter=".pi-sport-tour" href="#">Architecture</a></li>
+                                @foreach($categories as $cat)
+                                <li><a data-filter=".pi-world-tour" href="{{ route('category.featured',$cat->id) }}">{{ $cat->category_name_en }}</a></li>
+                                @endforeach
                             </ul>
 
                         </div><!-- .col-md-12 end -->

@@ -37,10 +37,10 @@
          	<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             @php
-         		$id = Auth::user()->id;
-        		$adminData = App\Models\User::find($id);
+         		// $id = Auth::user()->id;
+        		// $adminData = App\Models\User::find($id);
          	@endphp
-        <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+        <span class="mr-2 d-none d-lg-inline text-gray-600 small">ashraful</span>
             <img id="showImage" class="img-profile rounded-circle" name="photo" src="{{ (!empty($adminData->photo)) ? url('upload/admin_images/'.$adminData->photo):url('upload/no_image.jpg') }}" alt="Admin">
          </a>
 
