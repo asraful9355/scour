@@ -9,7 +9,7 @@
      <!--  <div class="sidebar-brand-icon rotate-n-15">
          <i class="fas fa-anchor"></i>
       </div> -->
-      <div class="sidebar-brand-text mx-3">{{ Auth::user()->name }} Dashboard</div>
+      <div class="sidebar-brand-text mx-3"> Dashboard</div>
    </a>
    <!-- Divider -->
    <hr class="sidebar-divider my-0">
@@ -28,10 +28,29 @@
       <i class="fas fa-fw fa-folder"></i>
       <span>Category</span>
       </a>
-      <div id="category" class="collapse " aria-labelledby="headingPages" data-parent="#accordionSidebar">
+      <div id="category" class="collapse
+      {{ ($route == 'category.index') ? 'show' : '' }}
+      {{ ($route == 'category.create') ? 'show' : '' }}
+      " aria-labelledby="headingPages" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item " href="#">Manage Category</a>
-            <a class="collapse-item " href="#">Add Category</a>
+            <a class="collapse-item " href="{{ route('category.index') }}">Manage Category</a>
+            <a class="collapse-item " href="{{ route('category.create') }}">Add Category</a>
+         </div>
+      </div>
+   </li>
+   <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#work"
+         aria-expanded="true" aria-controls="real_estate">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>Our Work</span>
+      </a>
+      <div id="work" class="collapse
+      {{ ($route == 'work.index') ? 'show' : '' }}
+      {{ ($route == 'work.create') ? 'show' : '' }}
+      " aria-labelledby="headingPages" data-parent="#accordionSidebar">
+         <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item " href="{{ route('work.index') }}">Manage Work</a>
+            <a class="collapse-item " href="{{ route('work.create') }}">Add Work</a>
          </div>
       </div>
    </li>
@@ -53,12 +72,12 @@
       </div>
    </li>
 
-   
+
    <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#about"
          aria-expanded="true" aria-controls="real_estate">
       <i class="fas fa-fw fa-folder"></i>
-      <span>About Scour Company</span> 
+      <span>About Company</span>
       </a>
       <div id="about" class="collapse
 
@@ -72,13 +91,13 @@
             <a class="collapse-item {{ ($route == 'about.create') ? 'active' : '' }}" href="{{ route('about.create') }}">Add About</a>
          </div>
       </div>
-   </li> 
+   </li>
 
    <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#featured_project"
          aria-expanded="true" aria-controls="real_estate">
       <i class="fas fa-fw fa-folder"></i>
-      <span>Featured Projects</span> 
+      <span>Featured Projects</span>
       </a>
       <div id="featured_project" class="collapse
 
@@ -92,13 +111,13 @@
             <a class="collapse-item {{ ($route == 'project.create') ? 'active' : '' }}" href="{{ route('project.create') }}">Add Project</a>
          </div>
       </div>
-   </li> 
+   </li>
 
    <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#services"
          aria-expanded="true" aria-controls="real_estate">
       <i class="fas fa-fw fa-folder"></i>
-      <span>Our Services</span> 
+      <span>Our Services</span>
       </a>
       <div id="services" class="collapse
 
@@ -112,7 +131,7 @@
             <a class="collapse-item {{ ($route == 'services.create') ? 'active' : '' }}" href="{{ route('services.create') }}">Add Services</a>
          </div>
       </div>
-   </li> 
+   </li>
 
    <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#client"
@@ -169,6 +188,25 @@
          <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item {{ ($route == 'banner.index') ? 'active' : '' }}" href="{{ route('banner.index') }}">Manage Banner</a>
             <a class="collapse-item {{ ($route == 'banner.create') ? 'active' : '' }}" href="{{ route('banner.create') }}">Add Banner</a>
+         </div>
+      </div>
+   </li>
+   <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#choose"
+         aria-expanded="true" aria-controls="real_estate">
+      <i class="fas fa-fw fa-folder"></i>
+      <span>Choose Us</span>
+      </a>
+      <div id="choose" class="collapse
+
+      {{ ($route == 'choose_des.index') ? 'show' : '' }}
+      {{ ($route == 'choose_about.index') ? 'show' : '' }}
+      {{ ($route == 'choose_about.create') ? 'show' : '' }}
+      " aria-labelledby="headingPages" data-parent="#accordionSidebar">
+         <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item {{ ($route == 'choose_des.index') ? 'active' : '' }}" href="{{ route('choose_des.index') }}">Add Choose Description</a>
+            <a class="collapse-item {{ ($route == 'choose_about.index') ? 'active' : '' }}" href="{{ route('choose_about.index') }}">Manage Choose</a>
+            <a class="collapse-item {{ ($route == 'choose_about.create') ? 'active' : '' }}" href="{{ route('choose_about.create') }}">Add Choose About</a>
          </div>
       </div>
    </li>

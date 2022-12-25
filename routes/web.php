@@ -7,13 +7,17 @@ use App\Http\Controllers\Backend\AboutController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\WorkController;
+
 use App\Http\Controllers\Backend\ClientController;
 use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\FeaturedProjectContoller;
 use App\Http\Controllers\Backend\MenuController;
+use App\Http\Controllers\Backend\ChooseController;
 use App\Http\Controllers\Backend\ServiceController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\TeamController;
+
 use App\Http\Controllers\Frontend\FrontendController;
 
 
@@ -28,6 +32,11 @@ use App\Http\Controllers\Frontend\FrontendController;
 |
 */
 Route::get('/',[FrontendController::class, 'index']);
+
+// Route::get('/test', function(){ 
+// 	return App\Models\Category::find(1)->works;
+//  });
+
 
 // User Dashboard
 Route::middleware(['auth'])->group(function() {
@@ -73,17 +82,31 @@ Route::middleware(['auth','role:admin'])->group(function() {
 //         Route::post('user/password/update',[UserController::class,'UserPasswordUpdate'])->name('user.password.update');
 
 //     });
-    // Route::group(['prefix'=>'category'], function(){
-    //     Route::get('/index', [CategoryController::class, 'index'])->name('category.index');
-    //     Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
-    //     Route::post('/store', [CategoryController::class, 'store'])->name('category.store');
-    //     Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
-    //     Route::post('/update/{id}', [CategoryController::class, 'update'])->name('category.update');
-    //     Route::get('/destroy/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
-    //     Route::get('/category-active/{id}', [CategoryController::class, 'active'])->name('category.active');
-    //     Route::get('/category-inactive/{id}', [CategoryController::class, 'inactive'])->name('category.in_active');
+    Route::group(['prefix'=>'category'], function(){
+        Route::get('/index', [CategoryController::class, 'index'])->name('category.index');
+        Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
+        Route::post('/store', [CategoryController::class, 'store'])->name('category.store');
+        Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+        Route::post('/update/{id}', [CategoryController::class, 'update'])->name('category.update');
+        Route::get('/destroy/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+        Route::get('/category-active/{id}', [CategoryController::class, 'active'])->name('category.active');
+        Route::get('/category-inactive/{id}', [CategoryController::class, 'inactive'])->name('category.in_active');
+        // category wise featured
+        // Route::get('/wise-featured/', [CategoryController::class, 'category_wise'])->name('category.featured');
 
-    // }); 
+
+    });
+    Route::group(['prefix'=>'work'], function(){
+        Route::get('/index', [WorkController::class, 'index'])->name('work.index');
+        Route::get('/create', [WorkController::class, 'create'])->name('work.create');
+        Route::post('/store', [WorkController::class, 'store'])->name('work.store');
+        Route::get('/edit/{id}', [WorkController::class, 'edit'])->name('work.edit');
+        Route::post('/update/{id}', [WorkController::class, 'update'])->name('work.update');
+        Route::get('/destroy/{id}', [WorkController::class, 'destroy'])->name('work.destroy');
+        Route::get('/work-active/{id}', [WorkController::class, 'active'])->name('work.active');
+        Route::get('/work-inactive/{id}', [WorkController::class, 'inactive'])->name('work.in_active');
+
+    });
 
     Route::group(['prefix'=>'menu'], function(){
         Route::get('/index', [MenuController::class, 'index'])->name('menu.index');
@@ -131,7 +154,28 @@ Route::middleware(['auth','role:admin'])->group(function() {
 
     });
 
+    Route::group(['prefix'=>'banner'], function(){
+        Route::get('/index', [BannerController::class, 'index'])->name('banner.index');
+        Route::get('/create', [BannerController::class, 'create'])->name('banner.create');
+        Route::post('/store', [BannerController::class, 'store'])->name('banner.store');
+        Route::get('/edit/{id}', [BannerController::class, 'edit'])->name('banner.edit');
+        Route::post('/update/{id}', [BannerController::class, 'update'])->name('banner.update');
+        Route::get('/destroy/{id}', [BannerController::class, 'destroy'])->name('banner.destroy');
+        Route::get('/banner-active/{id}', [BannerController::class, 'active'])->name('banner.active');
+        Route::get('/banner-inactive/{id}', [BannerController::class, 'inactive'])->name('banner.in_active');
+
+    });
+
     Route::group(['prefix'=>'project'], function(){
+
+        Route::get('/featured/descriptio/', [FeaturedProjectContoller::class, 'descriptio_index'])->name('project.description.index');
+        Route::get('/featured/descriptio/create', [FeaturedProjectContoller::class, 'descriptio_create'])->name('project.description.create');
+        Route::post('/featured/descriptio/store', [FeaturedProjectContoller::class, 'descriptio_store'])->name('project.description.store');
+        Route::get('/featured/descriptio/edit/{id}', [FeaturedProjectContoller::class, 'descriptio_edit'])->name('project.description.edit');
+        Route::post('/featured/descriptio/update/{id}', [FeaturedProjectContoller::class, 'descriptio_update'])->name('project.description.update');
+        Route::get('/featured/descriptio/destroy/{id}', [FeaturedProjectContoller::class, 'descriptio_destroy'])->name('project.description.destroy');
+        Route::get('/featured/descriptio/menu-active/{id}', [FeaturedProjectContoller::class, 'descriptio_active'])->name('project.description.active');
+        Route::get('/featured/descriptio/menu-inactive/{id}', [FeaturedProjectContoller::class, 'descriptio_inactive'])->name('project.description.in_active');
 
         // ==== Description=========
         Route::get('/featured/description/', [FeaturedProjectContoller::class, 'description_index'])->name('project.description.index');
@@ -142,7 +186,8 @@ Route::middleware(['auth','role:admin'])->group(function() {
         Route::get('/featured/description/destroy/{id}', [FeaturedProjectContoller::class, 'description_destroy'])->name('project.description.destroy');
         Route::get('/featured/description/menu-active/{id}', [FeaturedProjectContoller::class, 'description_active'])->name('project.description.active');
         Route::get('/featured/description/menu-inactive/{id}', [FeaturedProjectContoller::class, 'description_inactive'])->name('project.description.in_active');
-        
+
+
         Route::get('/index', [FeaturedProjectContoller::class, 'index'])->name('project.index');
         Route::get('/create', [FeaturedProjectContoller::class, 'create'])->name('project.create');
         Route::post('/store', [FeaturedProjectContoller::class, 'store'])->name('project.store');
@@ -151,10 +196,37 @@ Route::middleware(['auth','role:admin'])->group(function() {
         Route::get('/destroy/{id}', [FeaturedProjectContoller::class, 'destroy'])->name('project.destroy');
         Route::get('/menu-active/{id}', [FeaturedProjectContoller::class, 'active'])->name('project.active');
         Route::get('/menu-inactive/{id}', [FeaturedProjectContoller::class, 'inactive'])->name('project.in_active');
-        
 
-    }); 
-    
+
+
+    });
+
+    Route::group(['prefix'=>'choose'], function(){
+        Route::get('/index', [ChooseController::class, 'index'])->name('choose_about.index');
+        Route::get('/choose-about-create', [ChooseController::class, 'create'])->name('choose_about.create');
+        Route::post('/store', [ChooseController::class, 'store'])->name('choose_about.store');
+        Route::get('/edit/{id}', [ChooseController::class, 'edit'])->name('choose.edit');
+        Route::post('/update/{id}', [ChooseController::class, 'update'])->name('choose_about.update');
+        Route::get('/destroy/{id}', [ChooseController::class, 'destroy'])->name('choose.destroy');
+        Route::get('/choose-active/{id}', [ChooseController::class, 'active'])->name('choose.active');
+        Route::get('/choose-inactive/{id}', [ChooseController::class, 'inactive'])->name('choose.in_active');
+
+    });
+
+    Route::group(['prefix'=>'choose-description'], function(){
+        Route::get('/index', [ChooseController::class, 'index_des'])->name('choose_des.index');
+        Route::get('/create', [ChooseController::class, 'create_des'])->name('choose_des.create');
+        Route::post('/store', [ChooseController::class, 'store_des'])->name('choose_des.store');
+        Route::get('/edit/{id}', [ChooseController::class, 'edit_des'])->name('choose_des.edit');
+        Route::post('/update/{id}', [ChooseController::class, 'update_des'])->name('choose_des.update');
+        Route::get('/destroy/{id}', [ChooseController::class, 'destroy_des'])->name('choose_des.destroy');
+        Route::get('/active/{id}', [ChooseController::class, 'active_des'])->name('choose_des.active');
+        Route::get('/inactive/{id}', [ChooseController::class, 'inactive_des'])->name('choose_des.in_active');
+
+    });
+
+
+
     Route::group(['prefix'=>'services'], function(){
         Route::get('/index', [ServiceController::class, 'index'])->name('services.index');
         Route::get('/create', [ServiceController::class, 'create'])->name('services.create');
@@ -176,7 +248,7 @@ Route::middleware(['auth','role:admin'])->group(function() {
         Route::get('/description/menu-inactive/{id}', [ServiceController::class, 'description_inactive'])->name('services.description.in_active');
 
     });
-    
+
     Route::group(['prefix'=>'team'], function(){
         Route::get('/index', [TeamController::class, 'index'])->name('team.index');
         Route::get('/create', [TeamController::class, 'create'])->name('team.create');
@@ -198,7 +270,7 @@ Route::middleware(['auth','role:admin'])->group(function() {
         Route::get('/description/menu-inactive/{id}', [TeamController::class, 'description_inactive'])->name('team.description.in_active');
 
     });
-    
+
     Route::group(['prefix'=>'client'], function(){
         Route::get('/index', [ClientController::class, 'index'])->name('client.index');
         Route::get('/create', [ClientController::class, 'create'])->name('client.create');
@@ -230,6 +302,7 @@ Route::middleware(['auth','role:admin'])->group(function() {
         Route::get('/index', [SettingController::class, 'index'])->name('setting.index');
         Route::post('/update/{id}', [SettingController::class, 'update'])->name('update.setting');
     });
+
 
 
 

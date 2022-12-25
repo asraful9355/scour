@@ -20,17 +20,17 @@
                         <h4>Description Create</h4>
                         <hr>
                         <div class="row">
-                          
+
                             <div class="col-md-12">
                               <div class="form-group">
                                 <label for="featured_project_descrption_en">Write Your Featured Projects Description (English): <span class="text-danger">*</span></label>
                                 <textarea name="featured_project_descrption_en" id="featured_project_descrption_en" cols="30" rows="7" class="form-control summernote"></textarea>
                                 @error('featured_project_descrption_en')
-                                  <span class="text-danger">{{ $message }}</span> 
+                                  <span class="text-danger">{{ $message }}</span>
                                 @enderror
                               </div>
                             </div>
-                            
+
                            <div class="col-md-12">
                               <div class="form-group">
                                 <label for="featured_project_descrption_bn">Write Your Featured Projects Description (Bangla): <span class="text-danger">*</span></label>
