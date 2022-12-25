@@ -469,7 +469,7 @@ $banners = App\Models\Banner::where('status', 1)->latest()->get();
                             <ul class="portfolio-categories">
                                 <li><a data-filter="*" class="active" href="#all">All</a></li>
                                 @forelse($categories as $cat)
-                                <li><a data-filter=".pi-world-tour" href="#category{{$cat->id}}">{{ $cat->category_name_en }}</a></li>
+                                <li><a data-filter=".pi{{$cat->id}}" href="#category{{$cat->id}}">{{ $cat->category_name_en }}</a></li>
                                 @empty
                                 <h5 class="text-danger">No Category Found</h5>
                                 @endforelse
@@ -488,7 +488,7 @@ $banners = App\Models\Banner::where('status', 1)->latest()->get();
                     
                                 <div class="portfolio-items">
                                     @forelse($works as $work)
-                                    <div class="portfolio-item pi-world-tour">
+                                    <div class="portfolio-item pi{{$work->category_id}}">
                                         <div class="preview img-bg">
                                             <img src="{{ asset($work->work_image) }}" alt="">
                                         </div><!-- .preview end -->
