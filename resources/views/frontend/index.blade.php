@@ -184,7 +184,7 @@ Scour
                             </div><!-- .section-title end -->
 
                         </div><!-- .col-md-8 end -->  
-
+ 
                         @forelse($abouts->take(4) as $about)
                         <div class="col-md-3 text-center">
 
@@ -807,9 +807,9 @@ Scour
                                         <i class="fa fa-phone"></i>
                                         <h5>Our Phone</h5>
                                         <p>
-                                            +440 875369208 - Office
+                                            {{ $setting->phone }} - Office
                                             <br>
-                                            +440 353363114 - Fax
+                                            <!-- +440 353363114 - Fax -->
                                         </p>
                                     </div><!-- .box-contact-info end -->
 
@@ -820,9 +820,7 @@ Scour
                                         <i class="fa fa-map-marker"></i>
                                         <h5>Our Office</h5>
                                         <p>
-                                            795 South Park, Door 6
-                                            <br>
-                                            Wonderland, CA 94107, Australia
+                                            {{ $setting->business_address }}
                                         </p>
                                     </div><!-- .box-contact-info end -->
 
@@ -833,9 +831,9 @@ Scour
                                         <i class="fa fa-envelope"></i>
                                         <h5>Our Email</h5>
                                         <p>
-                                             support@sitename.com
+                                             {{ $setting->support_email }}
                                             <br>
-                                            info@sitename.com
+                                            {{ $setting->email }}
                                         </p>
                                     </div><!-- .box-contact-info end -->
 

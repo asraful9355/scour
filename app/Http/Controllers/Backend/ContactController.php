@@ -1,24 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\About;
-use App\Models\AboutDescription;
-use App\Models\Setting;
 use Illuminate\Http\Request;
 
-class FrontendController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() 
+    public function index()
     {
-        $setting = Setting::find(1);
-       return view('frontend.index', compact('setting'));
+        //
     }
 
     /**

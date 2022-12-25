@@ -8,9 +8,11 @@ use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ClientController;
+use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\FeaturedProjectContoller;
 use App\Http\Controllers\Backend\MenuController;
 use App\Http\Controllers\Backend\ServiceController;
+use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\TeamController;
 use App\Http\Controllers\Frontend\FrontendController;
 
@@ -219,6 +221,15 @@ Route::middleware(['auth','role:admin'])->group(function() {
 
     });
 
+
+    Route::group(['prefix'=>'contact'], function(){
+        Route::get('/index', [ContactController::class, 'index'])->name('contact.index');
+        Route::post('/update', [ContactController::class, 'update'])->name('update.contact');
+    });
+    Route::group(['prefix'=>'setting'], function(){
+        Route::get('/index', [SettingController::class, 'index'])->name('setting.index');
+        Route::post('/update/{id}', [SettingController::class, 'update'])->name('update.setting');
+    });
 
 
 

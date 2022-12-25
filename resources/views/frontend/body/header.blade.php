@@ -7,22 +7,22 @@
                 <div class="col-md-12">
 
                     <ul class="header-contact-info">
-                        <li><i class="fa fa-phone"></i><span>Call Us:</span> +201093515252</li>
-                        <li><i class="fa fa-envelope"></i><span>Email:</span> mail@Example.com</li>
+                        <li><i class="fa fa-phone"></i><span>Call Us:</span> {{ $setting->phone }} </li>
+                        <li><i class="fa fa-envelope"></i><span>Email:</span> {{ $setting->support_email }} </li>
                     </ul><!-- .header-contact-info end -->
                     <div class="header-social-icons">
                         <span>Follow Us:</span>
                         <ul class="social-icons">
-                            <li><a class="si-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a class="si-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a class="si-behance" href="#"><i class="fa fa-behance"></i></a></li>
-                            <li><a class="si-dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a class="si-facebook" href="{{ $setting->facebook_url }}"><i class="fa fa-facebook"></i></a></li>
+                            <li><a class="si-twitter" href="{{ $setting->twitter_url }}"><i class="fa fa-twitter"></i></a></li>
+                            <li><a class="si-behance" href="{{ $setting->linkedin_url }}"><i class="fa fa-behance"></i></a></li>
+                            <li><a class="si-dribbble" href="{{ $setting->youtube_url }}"><i class="fa fa-dribbble"></i></a></li>
                         </ul><!-- .social-icons end -->
                     </div><!-- .header-social-icons -->
 
                     <div class="logo-and-nav">
                         <a class="logo logo-header logo-text" href="#">
-                            <img src="{{ asset('frontend/images/files/logo.png')}}" alt="">
+                            <img src="{{ asset($setting->site_logo)}}" alt="">
                             <h3><span class="colored">Scour</span></h3>
                             <span>Landing Template</span>
                         </a><!-- .logo end -->

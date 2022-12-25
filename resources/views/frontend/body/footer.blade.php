@@ -9,16 +9,22 @@
                     <div class="row">
                         <div class="col-md-6">
 
+                            @php
+                            $about_description = App\Models\AboutDescription::where('status', 1)->first();
+                            $abouts = App\Models\About::where('status', 1)->orderBy('id', 'DESC')->get();
+                            $projects = App\Models\FeaturedProject::where('status', 1)->orderBy('id', 'DESC')->get();
+                            @endphp
+
                             <div class="box-widget">
                                 <h5 class="box-title">About Us</h5>
                                 <div class="box-content">
                                     <p>
-                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                        {!! $about_description-> about_descrption_en ?? 'NULL' !!}
                                     </p>
                                     <p>
-                                        Email Us: <span class="color-white">support@scour.com</span>
+                                        Email Us: <span class="color-white">{{ $setting->support_email }}</span>
                                         <br>
-                                        Call Us: <span class="color-white">002 01093515252</span>
+                                        Call Us: <span class="color-white">{{ $setting->phone }}</span>
                                     </p>
                                 </div><!-- .box-content end -->
                             </div><!-- .box-widget end -->
@@ -57,11 +63,12 @@
                                 <h5 class="box-title">Latest Projects</h5>
                                 <div class="box-content">
                                     <ul class="list-posts text-white">
+                                        @forelse($projects->take(3) as $project)
                                         <li>
-                                            <div class="post-img"><a href="#" class="post-img"><img src="http://via.placeholder.com/80x80?text=Image" alt=""></a></div>
+                                            <div class="post-img"><a href="#" class="post-img"><img src="{{ asset($project->image) }}" alt=""></a></div>
                                             <div class="post-content">
                                                 <div class="post-title">
-                                                    <h6 class="capitalized"><a href="#">The Top 6 Event and Conference Upcoming</a></h6>
+                                                    <h6 class="capitalized"><a href="#">{{ $project->title_en ?? 'NULL' }}</a></h6>
                                                 </div><!-- .post-title end -->
                                                 <div class="post-meta">
                                                     <ul>
@@ -70,19 +77,9 @@
                                                 </div><!-- .post-meta end -->
                                             </div><!-- .post-content end -->
                                         </li>
-                                        <li>
-                                            <div class="post-img"><a href="#" class="post-img"><img src="http://via.placeholder.com/80x80?text=Image" alt=""></a></div>
-                                            <div class="post-content">
-                                                <div class="post-title">
-                                                    <h6 class="capitalized"><a href="#">Los Angeles Events and Things To Do 2017</a></h6>
-                                                </div><!-- .post-title end -->
-                                                <div class="post-meta">
-                                                    <ul>
-                                                        <li>10 May, 2017</li>
-                                                    </ul>
-                                                </div><!-- .post-meta end -->
-                                            </div><!-- .post-content end -->
-                                        </li>
+                                        @empty
+                                            <h5 class="text-danger">No Project Found</h5>
+                                        @endforelse
                                     </ul><!-- .list-posts -->
                                 </div><!-- .box-content end -->
                             </div><!-- .box-widget end -->

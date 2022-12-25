@@ -186,16 +186,21 @@
          </div>
       </div>
    </li>
+   
    <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#setting"
          aria-expanded="true" aria-controls="real_estate">
       <i class="fas fa-fw fa-folder"></i>
       <span>Setting</span>
       </a>
-      <div id="setting" class="collapse " aria-labelledby="headingPages" data-parent="#accordionSidebar">
+      <div id="setting" class="collapse
+
+      {{ ($route == 'contact.index') ? 'show' : '' }}
+      {{ ($route == 'setting.index') ? 'show' : '' }}
+      " aria-labelledby="headingPages" data-parent="#accordionSidebar">
          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item " href="#">Manage Setting</a>
-            <a class="collapse-item " href="#">Manage Seo</a>
+            <a class="collapse-item {{ ($route == 'contact.index') ? 'active' : '' }}" href="{{ route('contact.index') }}">Contact Us</a>
+            <a class="collapse-item {{ ($route == 'setting.index') ? 'active' : '' }}" href="{{ route('setting.index') }}">Setting</a>
          </div>
       </div>
    </li>
